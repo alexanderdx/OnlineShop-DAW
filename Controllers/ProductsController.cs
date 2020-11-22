@@ -40,6 +40,7 @@ namespace Online_Shop___DAW.Controllers
         {
             try
             {
+                product.CreatedAt = DateTime.UtcNow;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
