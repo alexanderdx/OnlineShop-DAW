@@ -5,8 +5,8 @@
 !README.md
 !.gitignore
 !Models/
-!Models/*
+!Models/**
 !Views/
-!Views/*
+!Views/**
 !Controllers/
-!Controllers/*
+!Controllers/**
