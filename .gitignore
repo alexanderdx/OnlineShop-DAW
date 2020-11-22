@@ -2,6 +2,7 @@
 *
 
 # ...except these
+!README.md
 !.gitignore
 !Models/
 !Models/*
