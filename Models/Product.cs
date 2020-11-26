@@ -23,6 +23,7 @@ namespace Online_Shop___DAW.Models
         public string Description { get; set; }
         [Required]
         public float Price { get; set; }
+        public float DiscountedPrice { get; set; }
         public string Image { get; set; }
         [Required]
         public int Stock { get; set; }

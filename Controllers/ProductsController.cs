@@ -79,6 +79,7 @@ namespace Online_Shop___DAW.Controllers
                     product.Name = requestProduct.Name;
                     product.Description = requestProduct.Description;
                     product.Price = requestProduct.Price;
+                    product.DiscountedPrice = requestProduct.DiscountedPrice;
                     product.Image = requestProduct.Image;
                     product.Stock = requestProduct.Stock;
                     product.Status = requestProduct.Status;
