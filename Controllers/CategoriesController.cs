@@ -64,7 +64,7 @@ namespace Online_Shop___DAW.Controllers
                 .Include("Products")
                 .FirstOrDefault(p => p.CategoryId == id);
             ViewBag.Category = category;
-            return View();
+            return View(category);
         }
 
         [HttpPut]
