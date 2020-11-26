@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Online_Shop___DAW.Models
 {
@@ -29,8 +30,12 @@ namespace Online_Shop___DAW.Models
         public ProductStatus Status { get; set; }
         [Required]
         public DateTime CreatedAt { get; set; }
+        [Required]
+        public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+
+        public IEnumerable<SelectListItem> Categ { get; set; }
     }
 }

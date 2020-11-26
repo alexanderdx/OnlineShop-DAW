@@ -1,0 +1,50 @@
+﻿@model Online_Shop___DAW.Models.Product
+
+<h2>Editeaza produsul</h2>
+
+@using (Html.BeginForm(actionName: "edit", controllerName: "products"))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+
+    @Html.HiddenFor(p => p.ProductId)
+
+    @Html.Label("Name", "Nume produs")
+    <br />
+    @Html.EditorFor(p => p.Name)
+    @Html.ValidationMessageFor(p => p.Name, "", new { @class = "text-danger" })
+    <br /> <br />
+
+    @Html.Label("Description", "Descriere produs")
+    <br />
+    @Html.EditorFor(p => p.Description)
+    @Html.ValidationMessage("Description", "", new { @class = "text-danger" })
+    <br /> <br />
+
+    @Html.Label("Price", "Pret")
+    <br />
+    @Html.EditorFor(p => p.Price)
+    @Html.ValidationMessage("Price", "", new { @class = "text-danger" })
+    <br /> <br />
+
+    @Html.Label("Stock", "Buc. stoc")
+    <br />
+    @Html.EditorFor(p => p.Stock)
+    @Html.ValidationMessage("Stock", "", new { @class = "text-danger" })
+    <br /> <br />
+
+    @Html.Label("Status", "Status produs (0 - in curs de aprobare / 1 - respins / 2 - aprobat)")
+    <br />
+    @Html.EditorFor(p => p.Status)
+    @Html.ValidationMessage("Status", "", new { @class = "text-danger" })
+    <br /> <br />
+
+    <label>Selectati categoria</label>
+    @Html.DropDownListFor(p => p.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
+    "Selectati categoria", new { @class = "form-control" })
+    @Html.ValidationMessageFor(p => p.CategoryId, "", new { @class = "text-danger" })
+    <br /> <br />
+
+    <button class="btn btn-sm btn-success" type="submit">Modifica produs</button>
+
+}
+

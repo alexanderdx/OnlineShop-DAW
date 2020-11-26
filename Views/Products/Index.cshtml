@@ -1,0 +1,19 @@
+﻿
+<h1>@TempData["message"]</h1>
+
+<h2>Produse</h2>
+
+<a class="btn btn-primary" href="/products/new">Adauga produs</a>
+
+<br />
+
+@foreach (Online_Shop___DAW.Models.Product product in ViewBag.Products)
+{
+    <div class="panel panel-default">
+        @Html.Partial("ProductInfo", product)
+        <div class="panel-footer">
+            <a class="btn btn-success" href="/products/show/@product.ProductId">Pagina produsului</a>
+        </div>
+    </div>
+
+}

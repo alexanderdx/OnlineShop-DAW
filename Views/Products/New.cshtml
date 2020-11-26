@@ -1,0 +1,54 @@
+﻿@model Online_Shop___DAW.Models.Product
+
+<h2>Adauga un produs nou</h2>
+
+@using (Html.BeginForm(actionName: "new", controllerName: "products"))
+{
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.Label("Name", "Nume produs")
+    <br />
+    @Html.TextBox("Name", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(p => p.Name, "Numele este obligatoriu", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    @Html.Label("Description", "Descriere produs")
+    <br />
+    @Html.TextArea("Description", null, new { @class = "form-control" })
+    @Html.ValidationMessage("Description", "Descrierea este obligatorie", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    @Html.Label("Price", "Pret")
+    <br />
+    @Html.TextBox("Price", null, new { @class = "form-control" })
+    @Html.ValidationMessage("Price", "Pretul este obligatoriu", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    @Html.Label("Stock", "Buc. stoc")
+    <br />
+    @Html.TextBox("Stock", null, new { @class = "form-control" })
+    @Html.ValidationMessage("Stock", "Stocul este obligatoriu", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    @Html.Label("Status", "Status produs (0 - in curs de aprobare / 1 - respins / 2 - aprobat)")
+    <br />
+    @Html.TextBox("Status", null, new { @class = "form-control" })
+    @Html.ValidationMessage("Status", "Statusul este obligatoriu", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    <label>Selectati categoria</label>
+    @Html.DropDownListFor(p => p.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
+    "Selectati categoria", new { @class = "form-control" })
+    @Html.ValidationMessageFor(p => p.CategoryId, "", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    <button class="btn btn-sm btn-success" type="submit">Adauga produs</button>
+
+}
+

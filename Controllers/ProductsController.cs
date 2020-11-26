@@ -27,12 +27,15 @@ namespace Online_Shop___DAW.Controllers
                 .Include("Reviews")
                 .FirstOrDefault(p => p.ProductId == id);
             ViewBag.Product = product;
-            return View();
+            return View(product);
         }
 
         public ActionResult New()
         {
-            return View();
+            Product product = new Product();
+            product.Categ = GetAllCategories();
+
+            return View(product);
         }
 
         [HttpPost]
@@ -41,8 +44,10 @@ namespace Online_Shop___DAW.Controllers
             try
             {
                 product.CreatedAt = DateTime.UtcNow;
+                product.Categ = GetAllCategories();
                 db.Products.Add(product);
                 db.SaveChanges();
+                TempData["message"] = "Produsul a fost trimis catre evaluare! Va multumim!";
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -58,8 +63,9 @@ namespace Online_Shop___DAW.Controllers
                 .Include("Category")
                 .Include("Reviews")
                 .FirstOrDefault(p => p.ProductId == id);
+            product.Categ = GetAllCategories();
             ViewBag.Product = product;
-            return View();
+            return View(product);
         }
 
         [HttpPut]
@@ -95,6 +101,27 @@ namespace Online_Shop___DAW.Controllers
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [NonAction]
+        public IEnumerable<SelectListItem> GetAllCategories()
+        {
+            var selectList = new List<SelectListItem>();
+
+            var categories = from cat in db.Categories
+                             select cat;
+
+            foreach (var category in categories)
+            {
+                // adaugam in lista elementele necesare pentru dropdown
+                selectList.Add(new SelectListItem
+                {
+                    Value = category.CategoryId.ToString(),
+                    Text = category.Name.ToString()
+                });
+            }
+
+            return selectList;
         }
     }
 }

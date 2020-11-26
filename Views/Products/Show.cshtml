@@ -1,0 +1,75 @@
+﻿@model Online_Shop___DAW.Models.Product
+
+@{
+    ViewBag.Title = "Show";
+}
+<br />
+<a href="/products/index">Inapoi la produse</a>
+<br />
+<br />
+
+<div class="panel panel-default">
+    @Html.Partial("ProductInfo", Model)
+    <div class="panel-footer">
+        <a class="btn btn-success pull-left" href="/products/edit/@Model.ProductId">Modifica produs</a>
+
+        @using (Html.BeginForm(actionName: "delete", controllerName: "products", method: FormMethod.Post, routeValues: new { id = @Model.ProductId }))
+        {
+            @Html.HttpMethodOverride(HttpVerbs.Delete)
+            <button class="btn btn-danger pull-right" type="submit">Sterge produs</button>
+        }
+        <div class="clearfix"></div>
+    </div>
+
+</div>
+
+
+<br />
+@foreach (var review in Model.Reviews)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div>
+                    <p>@review.Content</p>
+                    <small class="pull-right">@review.CreatedAt</small>
+                </div>
+                <div style="display: inline-block; float : left; margin-right: 15px">
+                    <a class="glyphicon glyphicon-pencil" href="/reviews/edit/@review.ReviewId"></a>
+                </div>
+                <div style="display: inline-block; float : left">
+                    <form method="post" action="/reviews/delete/@review.ReviewId">
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button class="glyphicon glyphicon-trash" style="border: none; background: transparent" type="submit"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <hr />
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <div class="panel">
+                <form method="post" action="/reviews/new">
+                    <div class="panel-body">
+                        <input type="hidden" name="ProductId" value="@Model.ProductId" />
+                        <label>Continut review</label>
+                        <br />
+                        <textarea class="form-control" name="Content"></textarea>
+                        <br />
+                        <button class="btn btn-success " type="submit">Adauga review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
