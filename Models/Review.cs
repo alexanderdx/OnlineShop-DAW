@@ -14,9 +14,11 @@ namespace Online_Shop___DAW.Models
         [Required]
         public string Content { get; set; }
         [Required]
+        [Range(0, 5)]
         public int Rating { get; set; }
         [Required]
         public DateTime CreatedAt { get; set; }
+        public int ProductId { get; set; }
         public virtual Product Product { get; set; }
     }
 }

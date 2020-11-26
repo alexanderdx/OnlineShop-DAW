@@ -38,7 +38,7 @@ namespace Online_Shop___DAW.Controllers
                 review.CreatedAt = DateTime.UtcNow;
                 db.Reviews.Add(review);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("/products/show/" + review.ProductId);
             }
             catch (Exception e)
             {
@@ -69,7 +69,7 @@ namespace Online_Shop___DAW.Controllers
                     review.Rating = requestReview.Rating;
                     db.SaveChanges();
                 }
-                return RedirectToAction("Index");
+                return Redirect("/products/show/" + review.ProductId);
             }
             catch (Exception e)
             {
@@ -84,7 +84,7 @@ namespace Online_Shop___DAW.Controllers
             Review review = db.Reviews.Find(id);
             db.Reviews.Remove(review);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect("/products/show/" + review.ProductId);
         }
     }
 }

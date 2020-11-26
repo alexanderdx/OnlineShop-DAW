@@ -13,6 +13,16 @@ namespace Online_Shop___DAW.Controllers
         // GET: Categories
         public ActionResult Index()
         {
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"].ToString();
+            }
+
+            var categories = from category in db.Categories
+                             orderby category.Name
+                             select category;
+            ViewBag.Categories = categories;
+            
             return View();
         }
 
@@ -38,6 +48,7 @@ namespace Online_Shop___DAW.Controllers
                 category.CreatedAt = DateTime.UtcNow;
                 db.Categories.Add(category);
                 db.SaveChanges();
+                TempData["message"] = "Categoria a fost adaugata!";
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -67,6 +78,7 @@ namespace Online_Shop___DAW.Controllers
                     category.Name = requestCategory.Name;
                     db.SaveChanges();
                 }
+                TempData["message"] = "Categoria a fost modificata!";
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -82,6 +94,7 @@ namespace Online_Shop___DAW.Controllers
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);
             db.SaveChanges();
+            TempData["message"] = "Categoria a fost stearsa!";
             return RedirectToAction("Index");
         }
     }
