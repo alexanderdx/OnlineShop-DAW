@@ -1,0 +1,58 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+#search-field {
+  background: var(--secondary);
+  color: var(--white);
+  transition: border .25s ease-in-out, width .25s ease-in-out .2s;
+  box-shadow: none;
+  border: 2px solid transparent;
+  width: 40%;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+
+#search-field:focus, #search-field:active {
+  border: 2px solid var(--white);
+  width: 94%;
+}
+
+@media (min-width: 992px) {
+  #search-field {
+    margin-bottom: unset;
+  }
+}
+
+.nav-item {
+  margin-right: 8px;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card a img {
+  transition: filter .2s ease-in-out;
+}
+
+.card a img:hover {
+  filter: brightness(.75);
+}
+
+.card-columns {
+  column-count: 1;
+}
+
+@media (min-width: 576px) {
+  .card-columns {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-columns {
+    column-count: 3;
+  }
+}
+

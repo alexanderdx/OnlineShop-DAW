@@ -1,0 +1,23 @@
+#promotion-card {
+  background: #303030;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.125);
+}
+
+#promotion-card img {
+  max-width: 300px;
+}
+
+#promotion-card .card {
+  overflow: hidden;
+  border-radius: .25rem .25rem 0 0;
+  border: none;
+}
+
+@media (min-width: 992px) {
+  #promotion-card .card {
+    overflow: hidden;
+    border-radius: 0.25rem 0 0 0.25rem;
+  }
+}
+

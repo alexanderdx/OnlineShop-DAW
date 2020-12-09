@@ -1,0 +1,30 @@
+.index-jumbotron {
+  padding: 50px 0 55px;
+  overflow: hidden;
+}
+
+@media (max-width:767px) {
+  .index-jumbotron {
+    text-align: center;
+  }
+}
+
+.index-jumbotron h2 {
+  font-weight: bold;
+  margin-bottom: 35px;
+  line-height: 1.5;
+  padding-top: 0;
+  margin-top: 0;
+  color: inherit;
+}
+
+.index-jumbotron .intro {
+  font-size: 18px;
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+.index-jumbotron .intro p {
+  margin-bottom: 35px;
+}
+

@@ -1,0 +1,23 @@
+#category-list {
+  width: 100%;
+}
+
+#category-list .btn-group a.btn {
+  text-align: unset;
+  padding: 9px 18px;
+  border-right: none;
+}
+
+#category-list .btn-group button.btn {
+  border-left: none;
+  padding: 0;
+}
+
+#category-list .btn-group .btn:hover, #category-list .btn-group .btn:focus, #category-list .btn-group .btn:active {
+  background-color: transparent;
+}
+
+#category-list .btn-group .btn {
+  background-color: #303030;
+}
+
