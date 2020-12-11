@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Online_Shop___DAW.Models
+namespace OnlineShopDAW.Models
 {
     public enum ProductStatus
     {

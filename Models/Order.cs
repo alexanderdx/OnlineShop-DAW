@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Online_Shop___DAW.Models
+namespace OnlineShopDAW.Models
 {
     public enum OrderStatus
     {
@@ -23,6 +23,6 @@ namespace Online_Shop___DAW.Models
         [Required]
         public DateTime CreatedAt { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
-        public virtual User User { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

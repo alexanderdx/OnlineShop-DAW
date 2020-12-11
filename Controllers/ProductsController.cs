@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Online_Shop___DAW.Models;
+using OnlineShopDAW.Models;
 
-namespace Online_Shop___DAW.Controllers
+namespace OnlineShopDAW.Controllers
 {
     public class ProductsController : Controller
     {
-        private Models.AppContext db = new Models.AppContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Products
         public ActionResult Index()
         {

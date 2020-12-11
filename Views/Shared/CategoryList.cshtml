@@ -1,11 +1,12 @@
-﻿<div class="col-md-3">
+﻿@using OnlineShopDAW.Models
+<div class="col-md-3">
     <div class="d-md-none" style="margin: 1rem 0;">
         <a class="btn btn-primary" data-toggle="collapse"
            aria-expanded="true" aria-controls="collapse-1" href="#collapse-1" role="button"
            style="width: 100%;">Show Categories</a>
         <div class="collapse show" id="collapse-1">
             <ul class="list-group" style="margin-top: 1rem;">
-                @foreach (Online_Shop___DAW.Models.Category cat in ViewBag.Categories)
+                @foreach (Category cat in ViewBag.Categories)
                 {
                     <li class="list-group-item">
                         <a class="text-white" href="/Categories/@cat.CategoryId">@cat.Name</a>
@@ -15,7 +16,7 @@
         </div>
     </div>
     <div class="btn-group-vertical btn-group-lg d-none d-md-block" role="group" id="category-list">
-        @foreach (Online_Shop___DAW.Models.Category cat in ViewBag.Categories)
+        @foreach (Category cat in ViewBag.Categories)
         {
             <div class="btn-group dropright">
                 <a class="btn btn-secondary" role="button" href="/Categories/@cat.CategoryId">
