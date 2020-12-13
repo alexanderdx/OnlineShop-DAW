@@ -1,5 +1,5 @@
 ﻿@using OnlineShopDAW.Models
-<h3 class="text-center" style="margin-bottom: 16px;font-weight: bold;">Deals of the Day</h3>
+<h3 id="deals-of-the-day" class="text-center font-weight-bold mb-3">Deals of the Day</h3>
 <div class="row">
     <div class="col">
         <div class="card-columns">
@@ -13,7 +13,7 @@
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <a href="/Products/@p.ProductId.ToString()" style="font-size: x-large;">
                                 <h4 class="mb-0">@p.Name</h4>
-                            </a><button class="btn btn-outline-danger" data-toggle="tooltip"
+                            </a><button class="btn btn-outline-danger btn-sm" data-toggle="tooltip"
                                         data-bs-tooltip="" type="button" title="Add to Favourites">
                                 <i class="fa fa-heart"></i>
                             </button>
@@ -22,7 +22,7 @@
                             @p.Description
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <button class="btn btn-primary" type="button">
+                            <button class="btn btn-primary btn-sm" type="button">
                                 <span class="d-none d-lg-inline"
                                       style="margin-right: 8px;">Add to Cart</span>
                                 <i class="fa fa-cart-plus"></i>

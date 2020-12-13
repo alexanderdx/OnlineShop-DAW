@@ -1,4 +1,5 @@
-﻿<div class="index-jumbotron" style="background: rgb(48, 48, 48);margin-bottom: 16px;">
+﻿@using Microsoft.AspNet.Identity
+<div class="index-jumbotron" style="background: rgb(48, 48, 48);margin-bottom: 16px;">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -14,8 +15,22 @@
                     <p>
                         Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat,
                         pellentesque ut laoreet vitae. Aliqua sed justo ligula.
-                    </p><a class="btn btn-primary btn-lg"
-                           role="button" href="#" style="margin-bottom: 12px;font-weight: bold;">REGISTER NOW</a>
+                    </p>
+                    @{ if (User.Identity.IsAuthenticated)
+                        {
+                            <a
+                               href="#deals-of-the-day"
+                               class="btn btn-primary btn-lg font-weight-bold mb-2"
+                               role="button" >VIEW DEALS</a>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("REGISTER NOW", "Register", "Account", null,
+                                     new Dictionary<string, object> {
+                               { "role", "button" },
+                               { "class", "btn btn-primary btn-lg font-weight-bold mb-2" } })
+                        }
+                      }
                 </div>
             </div>
             <div class="col-auto col-sm-6 col-md-5 d-lg-flex align-self-center">
