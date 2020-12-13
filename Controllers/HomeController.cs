@@ -12,13 +12,24 @@ namespace OnlineShopDAW.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            var categories = from cat in db.Categories orderby cat.Name ascending select cat;
+            var categories = from cat in db.Categories.Include("Products")
+                             orderby cat.Name ascending
+                             select cat;
             var dealsOfTheDay = from prod
                                 in db.Products
                                 where prod.DiscountedPrice != null
                                     && prod.Status == ProductStatus.accepted
                                 select prod;
             ViewBag.Categories = categories.ToList();
+            var rand = new Random();
+            foreach (Category c in ViewBag.Categories)
+            {
+                c.Products = c.Products
+                    .Where(p => p.Status == ProductStatus.accepted)
+                    .OrderBy(x => rand.Next())
+                    .Take(rand.Next(2, 6))
+                    .ToList();
+            }
             ViewBag.DealsOfTheDay = dealsOfTheDay
                 .Take(10)
                 .OrderByDescending(p => p.Price - p.DiscountedPrice)
