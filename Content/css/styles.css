@@ -24,16 +24,12 @@ body {
   }
 }
 
-.navbar-dark .navbar-toggler-icon {
-    background-image: none;
-}
-
 .nav-item {
   margin-right: 8px;
 }
 
-.card-body {
-  padding: 1rem;
+.navbar-dark .navbar-toggler-icon {
+  background-image: none;
 }
 
 .card a img {
@@ -59,3 +55,4 @@ body {
     column-count: 3;
   }
 }
+
