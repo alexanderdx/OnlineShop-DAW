@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="card" style="margin-top: 2rem;margin-bottom: 2rem;">
                 <div class="card-body">
                     <h3 class="text-center text-light card-title font-weight-bold">Login</h3>
@@ -23,7 +23,7 @@
                         <div class="form-group">
                             @Html.LabelFor(m => m.Password)
                             @Html.TextBoxFor(m => m.Password,
-                           new { @class = "form-control", type = "password", autocomplete = "new-password" })
+                           new { @class = "form-control", type = "password", autocomplete = "current-password" })
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
