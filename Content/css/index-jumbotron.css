@@ -28,3 +28,7 @@
   margin-bottom: 35px;
 }
 
+#carousel-1 .carousel-item img {
+  filter: brightness(.8);
+}
+
