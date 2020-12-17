@@ -12,3 +12,6 @@
 !Controllers/**
 !Content/
 !Content/**
+!App_Start/
+!App_Start/**
+!Startup.cs
