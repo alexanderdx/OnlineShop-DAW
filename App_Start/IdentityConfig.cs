@@ -114,11 +114,9 @@ namespace OnlineShopDAW
         {
         }
         public static ApplicationRoleManager
-        Create(IdentityFactoryOptions<ApplicationRoleManager> options,
-        IOwinContext context)
+        Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
-            var roleStore = new
-            RoleStore<IdentityRole>(context.Get<ApplicationDbContext>());
+            var roleStore = new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>());
             return new ApplicationRoleManager(roleStore);
         }
     }

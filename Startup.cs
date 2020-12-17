@@ -38,7 +38,7 @@ namespace OnlineShopDAW
                 user.Email = "admin@gmail.com";
                 user.FirstName = "admin";
                 user.LastName = "admin";
-                var adminCreated = UserManager.Create(user, "admin");
+                var adminCreated = UserManager.Create(user, "admin123");
                 if (adminCreated.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, "administrator");
