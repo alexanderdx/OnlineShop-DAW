@@ -32,9 +32,7 @@ namespace OnlineShopDAW.Models
         [Required]
         public DateTime CreatedAt { get; set; }
         [Required]
-        public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
-        public string UserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }

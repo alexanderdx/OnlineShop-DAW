@@ -52,7 +52,8 @@ namespace OnlineShopDAW.Controllers
             try
             {
                 product.CreatedAt = DateTime.UtcNow;
-                product.UserId = User.Identity.GetUserId();
+                product.ApplicationUser = db.Users.First(u => u.Id == User.Identity.GetUserId());
+                product.Category = db.Categories.First(c => c.CategoryId == product.Category.CategoryId);
                 product.Categ = GetAllCategories();
                 product.Status = ProductStatus.pending;
 
@@ -83,7 +84,7 @@ namespace OnlineShopDAW.Controllers
                 .Include("Reviews")
                 .FirstOrDefault(p => p.ProductId == id);
             product.Categ = GetAllCategories();
-            if (product.UserId == User.Identity.GetUserId() || User.IsInRole("administrator"))
+            if (product.ApplicationUser.Id == User.Identity.GetUserId() || User.IsInRole("administrator"))
             {
                 ViewBag.Product = product;
                 return View(product);
@@ -103,7 +104,7 @@ namespace OnlineShopDAW.Controllers
             {
                 Product product = db.Products.Find(id);
 
-                if (product.UserId == User.Identity.GetUserId() || User.IsInRole("administrator"))
+                if (product.ApplicationUser.Id == User.Identity.GetUserId() || User.IsInRole("administrator"))
                 {
                     if (TryUpdateModel(product))
                     {
@@ -114,7 +115,8 @@ namespace OnlineShopDAW.Controllers
                         product.Image = requestProduct.Image;
                         product.Stock = requestProduct.Stock;
                         product.Status = requestProduct.Status;
-                        product.Category = requestProduct.Category;
+                        product.Category = db.Categories
+                            .First(c => c.CategoryId == requestProduct.Category.CategoryId);
                         product.Status = requestProduct.Status;
                         db.SaveChanges();
                         TempData["message"] = "Produsul a fost modificat!";
@@ -139,7 +141,7 @@ namespace OnlineShopDAW.Controllers
         public ActionResult Delete(int id)
         {
                 Product product = db.Products.Find(id);
-            if (product.UserId == User.Identity.GetUserId() || User.IsInRole("administrator"))
+            if (product.ApplicationUser.Id == User.Identity.GetUserId() || User.IsInRole("administrator"))
             {
 
                 db.Products.Remove(product);
@@ -178,7 +180,7 @@ namespace OnlineShopDAW.Controllers
         private void SetButtonVisibility(Product product)
         {
             ViewBag.afisareButoane = false;
-            if (product.UserId == User.Identity.GetUserId() || User.IsInRole("administrator"))
+            if (product.ApplicationUser.Id == User.Identity.GetUserId() || User.IsInRole("administrator"))
             {
                 ViewBag.afisareButoane = true;
             }

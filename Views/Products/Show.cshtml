@@ -36,7 +36,7 @@
                     <p>@review.Content</p>
                     <small class="pull-right">@review.CreatedAt</small>
                 </div>
-                @if (review.UserId == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
+                @if (review.ApplicationUser.Id == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
                 {
                     <div style="display: inline-block; float : left; margin-right: 15px">
                         <a class="fa fa-pencil" href="/reviews/edit/@review.ReviewId"></a>
