@@ -52,8 +52,8 @@ namespace OnlineShopDAW.Controllers
             try
             {
                 product.CreatedAt = DateTime.UtcNow;
-                product.ApplicationUser = db.Users.First(u => u.Id == User.Identity.GetUserId());
-                product.Category = db.Categories.First(c => c.CategoryId == product.Category.CategoryId);
+                product.ApplicationUser = db.Users.Find(User.Identity.GetUserId());
+                product.Category = db.Categories.Find(product.Category.CategoryId);
                 product.Categ = GetAllCategories();
                 product.Status = ProductStatus.pending;
 
