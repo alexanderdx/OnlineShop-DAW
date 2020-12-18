@@ -3,8 +3,10 @@
 
 <h2>Produse</h2>
 
-<a class="btn btn-primary" href="/products/new">Adauga produs</a>
-
+@if (ViewBag.esteAdmin || ViewBag.esteColaborator)
+{ 
+    <a class="btn btn-primary" href="/products/new">Adauga produs</a>
+}
 <br />
 
 @foreach (OnlineShopDAW.Models.Product product in ViewBag.Products)

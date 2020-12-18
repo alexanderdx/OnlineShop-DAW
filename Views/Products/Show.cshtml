@@ -1,5 +1,7 @@
 ﻿@model OnlineShopDAW.Models.Product
 
+<h1>@TempData["message"]</h1>
+
 <br />
 <a href="/products/index">Inapoi la produse</a>
 <br />
@@ -7,17 +9,19 @@
 
 <div class="panel panel-default">
     @Html.Partial("ProductInfo", Model)
-    <div class="panel-footer">
-        <a class="btn btn-success pull-left" href="/products/edit/@Model.ProductId">Modifica produs</a>
+    @if (ViewBag.afisareButoane == true && ViewBag.esteAdmin)
+    {
+        <div class="panel-footer">
+            <a class="btn btn-success pull-left" href="/products/edit/@Model.ProductId">Modifica produs</a>
 
-        @using (Html.BeginForm(actionName: "delete", controllerName: "products", method: FormMethod.Post, routeValues: new { id = @Model.ProductId }))
-        {
-            @Html.HttpMethodOverride(HttpVerbs.Delete)
-            <button class="btn btn-danger pull-right" type="submit">Sterge produs</button>
-        }
-        <div class="clearfix"></div>
-    </div>
-
+            @using (Html.BeginForm(actionName: "delete", controllerName: "products", method: FormMethod.Post, routeValues: new { id = @Model.ProductId }))
+            {
+                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                <button class="btn btn-danger pull-right" type="submit">Sterge produs</button>
+            }
+            <div class="clearfix"></div>
+        </div>
+    }
 </div>
 
 
@@ -32,15 +36,18 @@
                     <p>@review.Content</p>
                     <small class="pull-right">@review.CreatedAt</small>
                 </div>
-                <div style="display: inline-block; float : left; margin-right: 15px">
-                    <a class="glyphicon glyphicon-pencil" href="/reviews/edit/@review.ReviewId"></a>
-                </div>
-                <div style="display: inline-block; float : left">
-                    <form method="post" action="/reviews/delete/@review.ReviewId">
-                        @Html.HttpMethodOverride(HttpVerbs.Delete)
-                        <button class="glyphicon glyphicon-trash" style="border: none; background: transparent" type="submit"></button>
-                    </form>
-                </div>
+                @if (review.UserId == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
+                {
+                    <div style="display: inline-block; float : left; margin-right: 15px">
+                        <a class="fa fa-pencil" href="/reviews/edit/@review.ReviewId"></a>
+                    </div>
+                    <div style="display: inline-block; float : left">
+                        <form method="post" action="/reviews/delete/@review.ReviewId">
+                            @Html.HttpMethodOverride(HttpVerbs.Delete)
+                            <button class="fa fa-trash" style="border: none; color:aquamarine; background: transparent" type="submit"></button>
+                        </form>
+                    </div>
+                }
             </div>
         </div>
         <div class="col-md-2"></div>
@@ -54,6 +61,8 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-8">
+            @if (ViewBag.esteLogat)
+            {
             <div class="panel">
                 <form method="post" action="/reviews/new">
                     <div class="panel-body">
@@ -66,6 +75,7 @@
                     </div>
                 </form>
             </div>
+            }
         </div>
         <div class="col-md-2"></div>
     </div>
