@@ -42,7 +42,7 @@ namespace OnlineShopDAW.Controllers
                 review.ApplicationUser = db.Users.First(u => u.Id == User.Identity.GetUserId());
                 db.Reviews.Add(review);
                 db.SaveChanges();
-                return Redirect("/products/show/" + review.Product.ProductId);
+                return RedirectToAction("Show", "Products", new { id = review.Product.ProductId });
             }
             catch (Exception e)
             {
@@ -66,7 +66,7 @@ namespace OnlineShopDAW.Controllers
             else
             {
                 TempData["message"] = "Nu aveti dreptul sa modificati acest review!";
-                return Redirect("/products");
+                return RedirectToAction("Index", "Products");
             }
         }
 
@@ -87,12 +87,12 @@ namespace OnlineShopDAW.Controllers
                         review.Rating = requestReview.Rating;
                         db.SaveChanges();
                     }
-                    return Redirect("/products/show/" + review.Product.ProductId);
+                    return RedirectToAction("Show", "Products", new { id = review.Product.ProductId });
                 }
                 else
                 {
                     TempData["message"] = "Nu aveti dreptul sa modificati acest review!";
-                    return Redirect("/products");
+                    return RedirectToAction("Index", "Products");
                 }
             }
             catch (Exception e)
@@ -111,12 +111,12 @@ namespace OnlineShopDAW.Controllers
             {
                 db.Reviews.Remove(review);
                 db.SaveChanges();
-                return Redirect("/products/show/" + review.Product.ProductId);
+                return RedirectToAction("Show", "Products", new { id = review.Product.ProductId });
             }
             else
             {
                 TempData["message"] = "Nu aveti dreptul sa modificati acest review!";
-                return Redirect("/products");
+                return RedirectToAction("Index", "Products");
             }
         }
     }
