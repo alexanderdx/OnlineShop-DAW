@@ -58,13 +58,6 @@ namespace OnlineShopDAW
                 role.Name = "registered";
                 roleManager.Create(role);
             }
-
-            if (!roleManager.RoleExists("unregistered"))
-            {
-                var role = new IdentityRole();
-                role.Name = "unregistered";
-                roleManager.Create(role);
-            }
         }
     }
 }
