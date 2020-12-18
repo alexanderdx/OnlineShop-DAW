@@ -65,7 +65,7 @@ namespace OnlineShopDAW.Controllers
             else
             {
                 TempData["message"] = "Nu aveti dreptul sa modificati acest review!";
-                return RedirectToAction("Index", "Products");
+                return Redirect("/products");
             }
         }
 
@@ -91,7 +91,7 @@ namespace OnlineShopDAW.Controllers
                 else
                 {
                     TempData["message"] = "Nu aveti dreptul sa modificati acest review!";
-                    return RedirectToAction("Index", "Products");
+                    return Redirect("/products");
                 }
             }
             catch (Exception e)
@@ -115,7 +115,7 @@ namespace OnlineShopDAW.Controllers
             else
             {
                 TempData["message"] = "Nu aveti dreptul sa modificati acest review!";
-                return RedirectToAction("Index", "Products");
+                return Redirect("/products");
             }
         }
     }
