@@ -19,8 +19,6 @@ namespace OnlineShopDAW.Models
         [Required]
         public DateTime CreatedAt { get; set; }
         public virtual Product Product { get; set; }
-        public int ProductId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
-        public string UserId { get; set; }
     }
 }

@@ -38,10 +38,11 @@ namespace OnlineShopDAW.Controllers
             try
             {
                 review.CreatedAt = DateTime.UtcNow;
-                review.UserId = User.Identity.GetUserId();
+                review.Product = db.Products.First(p => p.ProductId == review.Product.ProductId);
+                review.ApplicationUser = db.Users.First(u => u.Id == User.Identity.GetUserId());
                 db.Reviews.Add(review);
                 db.SaveChanges();
-                return Redirect("/products/show/" + review.ProductId);
+                return Redirect("/products/show/" + review.Product.ProductId);
             }
             catch (Exception e)
             {
@@ -57,7 +58,7 @@ namespace OnlineShopDAW.Controllers
                 .Include("Product")
                 .FirstOrDefault(p => p.ReviewId == id);
 
-            if (review.UserId == User.Identity.GetUserId() || User.IsInRole("administrator"))
+            if (review.ApplicationUser.Id == User.Identity.GetUserId() || User.IsInRole("administrator"))
             {
                 ViewBag.Review = review;
                 return View();
@@ -77,7 +78,7 @@ namespace OnlineShopDAW.Controllers
             {
                 Review review = db.Reviews.Find(id);
 
-                if (review.UserId == User.Identity.GetUserId() || User.IsInRole("administrator"))
+                if (review.ApplicationUser.Id == User.Identity.GetUserId() || User.IsInRole("administrator"))
                 {
                     if (TryUpdateModel(review))
                     {
@@ -86,7 +87,7 @@ namespace OnlineShopDAW.Controllers
                         review.Rating = requestReview.Rating;
                         db.SaveChanges();
                     }
-                    return Redirect("/products/show/" + review.ProductId);
+                    return Redirect("/products/show/" + review.Product.ProductId);
                 }
                 else
                 {
@@ -106,11 +107,11 @@ namespace OnlineShopDAW.Controllers
         public ActionResult Delete(int id)
         {
             Review review = db.Reviews.Find(id);
-            if (review.UserId == User.Identity.GetUserId() || User.IsInRole("administrator"))
+            if (review.ApplicationUser.Id == User.Identity.GetUserId() || User.IsInRole("administrator"))
             {
                 db.Reviews.Remove(review);
                 db.SaveChanges();
-                return Redirect("/products/show/" + review.ProductId);
+                return Redirect("/products/show/" + review.Product.ProductId);
             }
             else
             {
