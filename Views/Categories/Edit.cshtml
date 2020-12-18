@@ -8,9 +8,9 @@
 
     @Html.HiddenFor(m => m.CategoryId)
 
-    @Html.Label("Name", "Denumire categorie")
+    @Html.LabelFor(c => c.Name, "Denumire categorie")
     <br />
-    @Html.Editor("Name")
+    @Html.EditorFor(c => c.Name, "Name")
     <br /><br />
 
     <button class="btn btn-success" type="submit">Modifica categoria</button>

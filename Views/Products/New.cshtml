@@ -6,38 +6,38 @@
 {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
-    @Html.Label("Name", "Nume produs")
+    @Html.LabelFor(p => p.Name, "Nume produs")
     <br />
-    @Html.TextBox("Name", null, new { @class = "form-control" })
+    @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
     @Html.ValidationMessageFor(p => p.Name, "Numele este obligatoriu", new { @class = "text-danger" })
     <br />
     <br />
 
-    @Html.Label("Description", "Descriere produs")
+    @Html.LabelFor(p => p.Description, "Descriere produs")
     <br />
-    @Html.TextArea("Description", null, new { @class = "form-control" })
-    @Html.ValidationMessage("Description", "Descrierea este obligatorie", new { @class = "text-danger" })
-    <br />
-    <br />
-
-    @Html.Label("Price", "Pret")
-    <br />
-    @Html.TextBox("Price", null, new { @class = "form-control" })
-    @Html.ValidationMessage("Price", "Pretul este obligatoriu", new { @class = "text-danger" })
+    @Html.TextAreaFor(p => p.Description, new { @class = "form-control" })
+    @Html.ValidationMessageFor(p => p.Description, "Descrierea este obligatorie", new { @class = "text-danger" })
     <br />
     <br />
 
-    @Html.Label("Stock", "Buc. stoc")
+    @Html.LabelFor(p => p.Price, "Pret")
     <br />
-    @Html.TextBox("Stock", null, new { @class = "form-control" })
-    @Html.ValidationMessage("Stock", "Stocul este obligatoriu", new { @class = "text-danger" })
+    @Html.TextBoxFor(p => p.Price, new { @class = "form-control" })
+    @Html.ValidationMessageFor(p => p.Price, "Pretul este obligatoriu", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    @Html.LabelFor(p => p.Stock, "Buc. stoc")
+    <br />
+    @Html.TextBoxFor(p => p.Stock, new { @class = "form-control" })
+    @Html.ValidationMessageFor(p => p.Stock, "Stocul este obligatoriu", new { @class = "text-danger" })
     <br />
     <br />
 
     <br />
     <br />
 
-    <label>Selectati categoria</label>
+    @Html.LabelFor(p => p.Category.CategoryId, "Selectati categoria")
     @Html.DropDownListFor(p => p.Category.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
     "Selectati categoria", new { @class = "form-control" })
     @Html.ValidationMessageFor(p => p.Category.CategoryId, "", new { @class = "text-danger" })
