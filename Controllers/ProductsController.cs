@@ -92,7 +92,7 @@ namespace OnlineShopDAW.Controllers
             else
             {
                 TempData["message"] = "Nu aveti dreptul sa modificati produse!";
-                return Redirect("/products");
+                return RedirectToAction("Index", "Products");
             }
         }
 
@@ -121,12 +121,12 @@ namespace OnlineShopDAW.Controllers
                         db.SaveChanges();
                         TempData["message"] = "Produsul a fost modificat!";
                     }
-                    return Redirect("/products/show/" + product.ProductId);
+                    return RedirectToAction("Show", "Products", new { id = product.ProductId });
                 }
                 else
                 {
                     TempData["message"] = "Nu aveti dreptul sa modificati acest produs!";
-                    return Redirect("/products");
+                    return RedirectToAction("Index", "Products");
                 }
             }
             catch (Exception e)
