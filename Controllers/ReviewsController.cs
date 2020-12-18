@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using OnlineShopDAW.Models;
+using Microsoft.AspNet.Identity;
 
 namespace OnlineShopDAW.Controllers
 {
@@ -31,11 +32,13 @@ namespace OnlineShopDAW.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "administrator,collaborator,registered")]
         public ActionResult New(Review review)
         {
             try
             {
                 review.CreatedAt = DateTime.UtcNow;
+                review.UserId = User.Identity.GetUserId();
                 db.Reviews.Add(review);
                 db.SaveChanges();
                 return Redirect("/products/show/" + review.ProductId);
@@ -47,29 +50,49 @@ namespace OnlineShopDAW.Controllers
             }
         }
 
+        [Authorize(Roles = "administrator,collaborator,registered")]
         public ActionResult Edit(int id)
         {
             var review = db.Reviews
                 .Include("Product")
                 .FirstOrDefault(p => p.ReviewId == id);
-            ViewBag.Review = review;
-            return View();
+
+            if (review.UserId == User.Identity.GetUserId() || User.IsInRole("administrator"))
+            {
+                ViewBag.Review = review;
+                return View();
+            }
+            else
+            {
+                TempData["message"] = "Nu aveti dreptul sa modificati acest review!";
+                return RedirectToAction("Index", "Products");
+            }
         }
 
         [HttpPut]
+        [Authorize(Roles = "administrator,collaborator,registered")]
         public ActionResult Edit(int id, Review requestReview)
         {
             try
             {
                 Review review = db.Reviews.Find(id);
-                if (TryUpdateModel(review))
+
+                if (review.UserId == User.Identity.GetUserId() || User.IsInRole("administrator"))
                 {
-                    review.Title = requestReview.Title;
-                    review.Content = requestReview.Content;
-                    review.Rating = requestReview.Rating;
-                    db.SaveChanges();
+                    if (TryUpdateModel(review))
+                    {
+                        review.Title = requestReview.Title;
+                        review.Content = requestReview.Content;
+                        review.Rating = requestReview.Rating;
+                        db.SaveChanges();
+                    }
+                    return Redirect("/products/show/" + review.ProductId);
                 }
-                return Redirect("/products/show/" + review.ProductId);
+                else
+                {
+                    TempData["message"] = "Nu aveti dreptul sa modificati acest review!";
+                    return RedirectToAction("Index", "Products");
+                }
             }
             catch (Exception e)
             {
@@ -79,12 +102,21 @@ namespace OnlineShopDAW.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "administrator,collaborator,registered")]
         public ActionResult Delete(int id)
         {
             Review review = db.Reviews.Find(id);
-            db.Reviews.Remove(review);
-            db.SaveChanges();
-            return Redirect("/products/show/" + review.ProductId);
+            if (review.UserId == User.Identity.GetUserId() || User.IsInRole("administrator"))
+            {
+                db.Reviews.Remove(review);
+                db.SaveChanges();
+                return Redirect("/products/show/" + review.ProductId);
+            }
+            else
+            {
+                TempData["message"] = "Nu aveti dreptul sa modificati acest review!";
+                return RedirectToAction("Index", "Products");
+            }
         }
     }
 }
