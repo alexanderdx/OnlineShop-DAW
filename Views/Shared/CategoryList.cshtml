@@ -9,7 +9,7 @@
                 @foreach (Category cat in ViewBag.Categories)
                 {
                     <li class="list-group-item">
-                        @Html.ActionLink(cat.Name, "Show", "Categories", new { id = cat.CategoryId },
+                        @Html.ActionLink(cat.Name, "index", "products", new { id = cat.CategoryId },
                        new { @class = "text-white"})
                     </li>
                 }
@@ -20,7 +20,7 @@
         @foreach (Category cat in ViewBag.Categories)
         {
             <div class="btn-group dropright">
-                @Html.ActionLink(cat.Name, "Show", "Categories", new { id = cat.CategoryId },
+                @Html.ActionLink(cat.Name, "index", "products", new { id = cat.CategoryId },
                        new { @class = "btn btn-secondary", role = "button" })
                 <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
                         data-toggle="dropdown" aria-expanded="false" type="button"></button>

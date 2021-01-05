@@ -12,15 +12,30 @@ namespace OnlineShopDAW.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var products = from prod
+            IQueryable<Product> products;
+            if (id == null) {
+                products = from prod
                            in db.Products.Include("Category").Include("Reviews")
                            select prod;
+            }
+            else {
+              products = from prod
+                         in db.Products.Include("Category").Include("Reviews")
+                         where prod.Category.CategoryId == id
+                         select prod;
+            }
+
+            var category = db.Categories
+                .Include("Products")
+                .FirstOrDefault(p => p.CategoryId == id);
 
             ViewBag.esteAdmin = User.IsInRole("administrator");
             ViewBag.esteColaborator = User.IsInRole("collaborator");
             ViewBag.Products = products;
+            ViewBag.Category = category;
+
             return View();
         }
 
@@ -121,6 +136,13 @@ namespace OnlineShopDAW.Controllers
                         db.SaveChanges();
                         TempData["message"] = "Produsul a fost modificat!";
                     }
+                    foreach (var modelState in ModelState.Values)
+                    {
+                        foreach (var error in modelState.Errors)
+                        {
+                            System.Diagnostics.Debug.WriteLine(error.ErrorMessage);
+                        }
+                    }
                     return RedirectToAction("Show", "Products", new { id = product.ProductId });
                 }
                 else
@@ -140,10 +162,9 @@ namespace OnlineShopDAW.Controllers
         [Authorize(Roles = "administrator,collaborator")]
         public ActionResult Delete(int id)
         {
-                Product product = db.Products.Find(id);
+            Product product = db.Products.Find(id);
             if (product.ApplicationUser.Id == User.Identity.GetUserId() || User.IsInRole("administrator"))
             {
-
                 db.Products.Remove(product);
                 db.SaveChanges();
                 TempData["message"] = "Produsul a fost sters!";

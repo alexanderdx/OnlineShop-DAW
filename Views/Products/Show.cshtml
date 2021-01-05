@@ -6,26 +6,26 @@
 
 <h1>@TempData["message"]</h1>
 
-<br />
-<a href="/products/index">Inapoi la produse</a>
-<br />
-<br />
-
 <div class="panel panel-default">
-    @Html.Partial("ProductInfo", Model)
-    @if (ViewBag.afisareButoane == true && ViewBag.esteAdmin)
-    {
-        <div class="panel-footer">
-            <a class="btn btn-success pull-left" href="/products/edit/@Model.ProductId">Modifica produs</a>
+    <div class="container">
+        <br />
+        <a href="/products/index">Inapoi la produse</a>
+        <br />
+        @Html.Partial("ProductInfo", Model)
+        @if (ViewBag.afisareButoane == true && ViewBag.esteAdmin)
+        {
+            <div class="panel-footer">
+                <a class="btn btn-success pull-left" href="/products/edit/@Model.ProductId">Modifica produs</a>
 
-            @using (Html.BeginForm(actionName: "delete", controllerName: "products", method: FormMethod.Post, routeValues: new { id = @Model.ProductId }))
-            {
-                @Html.HttpMethodOverride(HttpVerbs.Delete)
-                <button class="btn btn-danger pull-right" type="submit">Sterge produs</button>
-            }
-            <div class="clearfix"></div>
-        </div>
-    }
+                @using (Html.BeginForm(actionName: "delete", controllerName: "products", method: FormMethod.Post, routeValues: new { id = @Model.ProductId }))
+                {
+                    @Html.HttpMethodOverride(HttpVerbs.Delete)
+                    <button class="btn btn-danger pull-right" type="submit">Sterge produs</button>
+                }
+                <div class="clearfix"></div>
+            </div>
+        }
+    </div>
 </div>
 
 

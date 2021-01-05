@@ -1,21 +1,25 @@
-﻿
-<h1>@TempData["message"]</h1>
+﻿@{ ViewBag.Title = ViewBag.Category; }
 
-<h2>Produse</h2>
+<div class="container">
+    <h1>@TempData["message"]</h1>
 
-@if (ViewBag.esteAdmin || ViewBag.esteColaborator)
-{ 
-    <a class="btn btn-primary" href="/products/new">Adauga produs</a>
-}
-<br />
+    @if (ViewBag.esteAdmin || ViewBag.esteColaborator)
+    {
+        <a class="btn btn-primary" href="/products/new">Adauga produs</a>
+    }
+    <br />
+    <br />
 
-@foreach (OnlineShopDAW.Models.Product product in ViewBag.Products)
-{
-    <div class="panel panel-default">
+    @if (ViewBag.Category != null)
+    {
+        <ol class="breadcrumb" style="/*background-color: transparent;*//*padding: 0;*/">
+            <li class="breadcrumb-item">@Html.ActionLink("Home", "Index", "Home")</li>
+            <li class="breadcrumb-item"><a href="/categories/show/@ViewBag.Category.CategoryId">@ViewBag.Category.Name</a></li>
+            <li class="breadcrumb-item active"><span>Products</span></li>
+        </ol>
+    }
+    @foreach (OnlineShopDAW.Models.Product product in ViewBag.Products)
+    {
         @Html.Partial("ProductInfo", product)
-        <div class="panel-footer">
-            <a class="btn btn-success" href="/products/show/@product.ProductId">Pagina produsului</a>
-        </div>
-    </div>
-
-}
+    }
+</div>

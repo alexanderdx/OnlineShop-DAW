@@ -3,8 +3,6 @@
     ViewBag.Title = "Afisare categorie";
 }
 
-<h2>@ViewBag.Title</h2>
-
 <p style="font-size:22px"><b>@ViewBag.Category.Name</b></p>
 <a class="btn btn-success" style="float:left" href="/categories/edit/@ViewBag.Category.CategoryId">Editare categorie</a>
 <form method="post" action="categories/delete/@ViewBag.Category.CategoryId">

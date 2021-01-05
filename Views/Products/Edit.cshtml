@@ -26,6 +26,12 @@
     @Html.ValidationMessageFor(p => p.Price, "", new { @class = "text-danger" })
     <br /> <br />
 
+    @Html.LabelFor(p => p.DiscountedPrice, "Pret Discount")
+    <br />
+    @Html.EditorFor(p => p.DiscountedPrice)
+    @Html.ValidationMessageFor(p => p.DiscountedPrice, "", new { @class = "text-danger" })
+    <br /> <br />
+
     @Html.LabelFor(p => p.Stock, "Buc. stoc")
     <br />
     @Html.EditorFor(p => p.Stock)

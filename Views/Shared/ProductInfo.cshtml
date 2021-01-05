@@ -1,11 +1,49 @@
 ﻿
-<div class="panel-heading">@Model.Name</div>
-<div class="panel-body">
-    <strong>@Model.Description</strong>
-    <br />
-    <span class="label label-success">@Model.Price</span>
-    <br />
-    <i class="glyphicon glyphicon-globe"></i> @Model.Category.Name
-    <br />
-    <hr>
+<div class="row" style="margin: 60px -15px;">
+    <div class="col-5"><a href="/products/show/@Model.ProductId"><img class="img-fluid" src="~/Content/img/image.jpg" style="border-radius: 0.25rem;"></a></div>
+    <div class="col d-flex flex-column justify-content-between">
+        <div class="row">
+            <div class="col">
+                <h3 class="d-flex flex-row align-items-center" style="font-weight: bold;">
+                    <a href="/products/show/@Model.ProductId">@Model.Name</a>
+                    @if (DateTime.Now.Subtract(Model.CreatedAt).TotalDays < 10)
+                    {
+                        <span class="badge badge-primary" style="margin-left: 8px;font-size: large;">New</span>
+                    }
+                    @if (Model.Stock <= 10)
+                    {
+                        <span class="badge badge-warning" style="margin-left: 8px;font-size: large;">Limited Stock</span>
+                    }
+                </h3>
+            </div>
+            <div class="col-auto align-self-center" style="padding-top: 0.25rem;">
+                @if (Model.DiscountedPrice != null)
+                {
+                    <h4 class="text-danger" style="font-weight: bold;">@Model.DiscountedPrice RON</h4>
+                    <p class="text-muted"><s>@Model.Price RON</s></p>
+                }
+                else
+                {
+                    <h4 class="text-danger" style="font-weight: bold;">@Model.Price RON</h4>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <p>@Model.Description<br></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <div style="margin-bottom: 0.5rem;">
+                    <label class="text-muted" for="quantity-input" style="margin-right: .5rem;margin-bottom: 0;">Quantity: @Model.Stock</label>
+                </div>
+                <button class="btn btn-primary" type="button">
+                    <span style="margin-right: 8px;">Add to Cart</span>
+                    <i class="fa fa-cart-plus"></i>
+                </button>
+                <button class="btn btn-outline-danger" data-toggle="tooltip" data-bs-tooltip="" type="button" title="Add to Favourites" style="margin-left: 0.5rem;"><i class="fa fa-heart"></i></button>
+            </div>
+        </div>
+    </div>
 </div>
