@@ -24,6 +24,5 @@ namespace OnlineShopDAW.Models
         public DateTime CreatedAt { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
-        public string UserId { get; set; }
     }
 }
