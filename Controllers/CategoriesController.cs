@@ -22,7 +22,7 @@ namespace OnlineShopDAW.Controllers
                              orderby category.Name
                              select category;
             ViewBag.Categories = categories;
-            
+            ViewBag.arePermisiuni = User.IsInRole("administrator") || User.IsInRole("collaborator");
             return View();
         }
 
@@ -35,11 +35,13 @@ namespace OnlineShopDAW.Controllers
             return View();
         }
 
+        [Authorize(Roles = "administrator,collaborator")]
         public ActionResult New()
         {
             return View();
         }
 
+        [Authorize(Roles = "administrator,collaborator")]
         [HttpPost]
         public ActionResult New(Category category)
         {
@@ -58,6 +60,7 @@ namespace OnlineShopDAW.Controllers
             }
         }
 
+        [Authorize(Roles = "administrator,collaborator")]
         public ActionResult Edit(int id)
         {
             var category = db.Categories
@@ -68,6 +71,7 @@ namespace OnlineShopDAW.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "administrator,collaborator")]
         public ActionResult Edit(int id, Category requestCategory)
         {
             try
@@ -89,6 +93,7 @@ namespace OnlineShopDAW.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "administrator,collaborator")]
         public ActionResult Delete(int id)
         {
             Category category = db.Categories.Find(id);
