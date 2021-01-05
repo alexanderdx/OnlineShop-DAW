@@ -61,18 +61,53 @@ namespace OnlineShopDAW.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.UpdateUserDetailsSuccess ? "Your details have been updated."
                 : "";
 
-            var userId = User.Identity.GetUserId();
+            var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                PhoneNumber = await UserManager.GetPhoneNumberAsync(currentUser.Id),
+                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(currentUser.Id),
+                Logins = await UserManager.GetLoginsAsync(currentUser.Id),
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(currentUser.Id),
+                AddressLine1 = currentUser.AddressLine1,
+                AddressLine2 = currentUser.AddressLine2,
+                City = currentUser.City,
+                Country = currentUser.Country,
+                ZipCode = currentUser.ZipCode
             };
             return View(model);
+        }
+
+        // POST: /Manage/New
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> New(IndexViewModel model)
+        {
+            ManageMessageId message = ManageMessageId.Error;
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index", new { Message = message});
+            }
+            ApplicationUser currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            currentUser.AddressLine1 = model.AddressLine1;
+            currentUser.AddressLine2 = model.AddressLine2;
+            currentUser.Country = model.Country;
+            currentUser.City = model.City;
+            currentUser.ZipCode = model.ZipCode;
+            var result = await UserManager.UpdateAsync(currentUser);
+
+            if (result.Succeeded)
+            {
+                message = ManageMessageId.UpdateUserDetailsSuccess;
+            }
+            else
+            {
+                message = ManageMessageId.Error;
+            }
+            return RedirectToAction("Index", new { Message = message });
         }
 
         //
@@ -381,6 +416,7 @@ namespace OnlineShopDAW.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            UpdateUserDetailsSuccess,
             Error
         }
 

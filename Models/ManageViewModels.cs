@@ -12,6 +12,27 @@ namespace OnlineShopDAW.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+
+        [Required]
+        [Display(Name = "Address Line 1")]
+        public string AddressLine1 { get; set; }
+
+        [Display(Name = "Address Line 2")]
+        public string AddressLine2 { get; set; }
+
+        [Display(Name = "Country")]
+        [Required]
+        public string Country { get; set; }
+
+        [Display(Name = "City")]
+        [Required]
+        public string City { get; set; }
+
+        [Display(Name = "Zip Code")]
+        [MinLength(6)]
+        [MaxLength(6)]
+        [Required]
+        public string ZipCode { get; set; }
     }
 
     public class ManageLoginsViewModel
