@@ -1,5 +1,9 @@
 ﻿@model OnlineShopDAW.Models.Product
 
+@{
+    ViewBag.Title = "Produse";
+}
+
 <h1>@TempData["message"]</h1>
 
 <br />
@@ -63,18 +67,18 @@
         <div class="col-md-8">
             @if (ViewBag.esteLogat)
             {
-            <div class="panel">
-                <form method="post" action="/reviews/new">
-                    <div class="panel-body">
-                        <input type="hidden" name="ProductId" value="@Model.ProductId" />
-                        <label>Continut review</label>
-                        <br />
-                        <textarea class="form-control" name="Content"></textarea>
-                        <br />
-                        <button class="btn btn-success " type="submit">Adauga review</button>
-                    </div>
-                </form>
-            </div>
+                <div class="panel">
+                    <form method="post" action="/reviews/new">
+                        <div class="panel-body">
+                            <input type="hidden" name="Product.ProductId" value="@Model.ProductId" />
+                            <label>Continut review</label>
+                            <br />
+                            <textarea class="form-control" name="Content"></textarea>
+                            <br />
+                            <button class="btn btn-success " type="submit">Adauga review</button>
+                        </div>
+                    </form>
+                </div>
             }
         </div>
         <div class="col-md-2"></div>

@@ -39,7 +39,7 @@ namespace OnlineShopDAW.Controllers
             {
                 review.CreatedAt = DateTime.UtcNow;
                 review.Product = db.Products.First(p => p.ProductId == review.Product.ProductId);
-                review.ApplicationUser = db.Users.First(u => u.Id == User.Identity.GetUserId());
+                review.ApplicationUser = db.Users.Find(User.Identity.GetUserId());
                 db.Reviews.Add(review);
                 db.SaveChanges();
                 return RedirectToAction("Show", "Products", new { id = review.Product.ProductId });
