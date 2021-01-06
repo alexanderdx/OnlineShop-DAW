@@ -93,3 +93,18 @@ hr.reviewSeparator {
     border-bottom: 1px solid #00bc8c;
     opacity: 0.7;
 }
+
+.btn-primary.accept-btn {
+    background-color: #00bc8c;
+    border-color: #00bc8c;
+}
+
+.btn-primary.reject-btn {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.btn-primary.postpone-btn {
+    background-color: #3498db;
+    border-color: #3498db;
+}

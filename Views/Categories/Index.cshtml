@@ -3,30 +3,33 @@
     ViewBag.Title = "Lista categorii";
 }
 
-@if (TempData.ContainsKey("message"))
-{
-    <h1>@TempData["message"]</h1>
-}
-
-<h2>@ViewBag.Title</h2>
-
-@if (ViewBag.arePermisiuni)
-{
-    <a class="btn btn-primary" href="/categories/new">Adauga categorie</a>
-}
-<br /> <br />
-
-@foreach (var category in ViewBag.Categories)
-{
-    <p style="font-size:22px"><b>@category.Name</b></p>
-    if (ViewBag.arePermisiuni) {
-        <a class="btn btn-success" style="float:left" href="/categories/edit/@category.CategoryId">Editare categorie</a>
-        <form method="post" action="categories/delete/@category.CategoryId">
-            @Html.HttpMethodOverride(HttpVerbs.Delete)
-            <button class="btn btn-danger" style="margin-left:10px" type="submit">Sterge categorie</button>
-        </form>
+<div class="container">
+    @if (TempData.ContainsKey("message"))
+    {
+        <h1>@TempData["message"]</h1>
     }
 
-    <hr />
-    <br />
-}
+    <h2>@ViewBag.Title</h2>
+
+    @if (ViewBag.arePermisiuni)
+    {
+        <a class="btn btn-primary" href="/categories/new">Adauga categorie</a>
+    }
+    <br /> <br />
+
+    @foreach (var category in ViewBag.Categories)
+    {
+        <p style="font-size:22px"><b>@category.Name</b></p>
+        if (ViewBag.arePermisiuni)
+        {
+            <a class="btn btn-success" style="float:left" href="/categories/edit/@category.CategoryId">Editare categorie</a>
+            <form method="post" action="categories/delete/@category.CategoryId">
+                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                <button class="btn btn-danger" style="margin-left:10px" type="submit">Sterge categorie</button>
+            </form>
+        }
+
+        <hr />
+        <br />
+    }
+</div>

@@ -16,6 +16,15 @@
                 <li class="nav-item">
                     @Html.ActionLink("Categories", "Index", "Categories", null, new { @class = "nav-link" })
                 </li>
+                @if (User.IsInRole("administrator"))
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Pending", "Index", "Pending", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Users", "Index", "Users", null, new { @class = "nav-link" })
+                    </li>
+                }
             </ul>
             <form class="form-inline mr-auto" target="_self" style="flex: 1;">
                 <div class="form-group w-100">

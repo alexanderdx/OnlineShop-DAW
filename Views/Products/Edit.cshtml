@@ -1,56 +1,57 @@
 ﻿@model OnlineShopDAW.Models.Product
 
-<h2>Editeaza produsul</h2>
+<div class="container">
+    <h2>Modifica produsul</h2>
 
-@using (Html.BeginForm(actionName: "edit", controllerName: "products"))
-{
-    @Html.HttpMethodOverride(HttpVerbs.Put)
+    @using (Html.BeginForm(actionName: "edit", controllerName: "products"))
+    {
+        @Html.HttpMethodOverride(HttpVerbs.Put)
 
-    @Html.HiddenFor(p => p.ProductId)
+        @Html.HiddenFor(p => p.ProductId)
 
-    @Html.LabelFor(p => p.Name, "Nume produs")
-    <br />
-    @Html.EditorFor(p => p.Name)
-    @Html.ValidationMessageFor(p => p.Name, "", new { @class = "text-danger" })
-    <br /> <br />
+        @Html.LabelFor(p => p.Name, "Nume produs")
+        <br />
+        @Html.EditorFor(p => p.Name)
+        @Html.ValidationMessageFor(p => p.Name, "", new { @class = "text-danger" })
+        <br /> <br />
 
-    @Html.LabelFor(p => p.Description, "Descriere produs")
-    <br />
-    @Html.EditorFor(p => p.Description)
-    @Html.ValidationMessageFor(p => p.Description, "", new { @class = "text-danger" })
-    <br /> <br />
+        @Html.LabelFor(p => p.Description, "Descriere produs")
+        <br />
+        @Html.EditorFor(p => p.Description)
+        @Html.ValidationMessageFor(p => p.Description, "", new { @class = "text-danger" })
+        <br /> <br />
 
-    @Html.LabelFor(p => p.Price, "Pret")
-    <br />
-    @Html.EditorFor(p => p.Price)
-    @Html.ValidationMessageFor(p => p.Price, "", new { @class = "text-danger" })
-    <br /> <br />
+        @Html.LabelFor(p => p.Price, "Pret")
+        <br />
+        @Html.EditorFor(p => p.Price)
+        @Html.ValidationMessageFor(p => p.Price, "", new { @class = "text-danger" })
+        <br /> <br />
 
-    @Html.LabelFor(p => p.DiscountedPrice, "Pret Discount")
-    <br />
-    @Html.EditorFor(p => p.DiscountedPrice)
-    @Html.ValidationMessageFor(p => p.DiscountedPrice, "", new { @class = "text-danger" })
-    <br /> <br />
+        @Html.LabelFor(p => p.DiscountedPrice, "Pret Discount")
+        <br />
+        @Html.EditorFor(p => p.DiscountedPrice)
+        @Html.ValidationMessageFor(p => p.DiscountedPrice, "", new { @class = "text-danger" })
+        <br /> <br />
 
-    @Html.LabelFor(p => p.Stock, "Buc. stoc")
-    <br />
-    @Html.EditorFor(p => p.Stock)
-    @Html.ValidationMessageFor(p => p.Stock, "", new { @class = "text-danger" })
-    <br /> <br />
+        @Html.LabelFor(p => p.Stock, "Buc. stoc")
+        <br />
+        @Html.EditorFor(p => p.Stock)
+        @Html.ValidationMessageFor(p => p.Stock, "", new { @class = "text-danger" })
+        <br /> <br />
 
-    @Html.LabelFor(p => p.Status, "Status produs (0 - in curs de aprobare / 1 - respins / 2 - aprobat)")
-    <br />
-    @Html.EditorFor(p => p.Status)
-    @Html.ValidationMessageFor(p => p.Status, "", new { @class = "text-danger" })
-    <br /> <br />
+        @Html.LabelFor(p => p.Status, "Status produs (0 - in curs de aprobare / 1 - respins / 2 - aprobat)")
+        <br />
+        @Html.EditorFor(p => p.Status)
+        @Html.ValidationMessageFor(p => p.Status, "", new { @class = "text-danger" })
+        <br /> <br />
 
-    @Html.LabelFor(p => p.Category.CategoryId, "Selectati categoria")
-    @Html.DropDownListFor(p => p.Category.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
-    "Selectati categoria", new { @class = "form-control" })
-    @Html.ValidationMessageFor(p => p.Category.CategoryId, "", new { @class = "text-danger" })
-    <br /> <br />
+        @Html.LabelFor(p => p.Category.CategoryId, "Selectati categoria")
+        @Html.DropDownListFor(p => p.Category.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
+        "Selectati categoria", new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Category.CategoryId, "", new { @class = "text-danger" })
+        <br /> <br />
 
-    <button class="btn btn-sm btn-success" type="submit">Modifica produs</button>
+        <button class="btn btn-sm btn-success" type="submit">Modifica produs</button>
 
-}
-
+    }
+</div>

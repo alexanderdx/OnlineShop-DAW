@@ -1,18 +1,19 @@
 ﻿@model OnlineShopDAW.Models.Category
 
-<h2>Editare categorie</h2>
+<div class="container">
+    <h2>Editare categorie</h2>
 
-<form method="post" action="/categories/edit/@Model.CategoryId">
+    <form method="post" action="/categories/edit/@Model.CategoryId">
 
-    @Html.HttpMethodOverride(HttpVerbs.Put)
+        @Html.HttpMethodOverride(HttpVerbs.Put)
 
-    @Html.HiddenFor(m => m.CategoryId)
+        @Html.HiddenFor(m => m.CategoryId)
 
-    @Html.LabelFor(c => c.Name, "Denumire categorie")
-    <br />
-    @Html.EditorFor(c => c.Name, "Name")
-    <br /><br />
+        @Html.LabelFor(c => c.Name, "Denumire categorie")
+        <br />
+        @Html.EditorFor(c => c.Name, "Name")
+        <br /><br />
 
-    <button class="btn btn-success" type="submit">Modifica categoria</button>
-</form>
-
+        <button class="btn btn-success" type="submit">Modifica categoria</button>
+    </form>
+</div>

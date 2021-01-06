@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Pending";
+}
+
+<div class="container">
+
+    <h2>Produse in asteptare</h2>
+
+    <h1>@TempData["message"]</h1>
+
+    @foreach (OnlineShopDAW.Models.Product product in ViewBag.Products)
+    {
+        @Html.Partial("PendingProductView", product)
+    }
+
+</div>

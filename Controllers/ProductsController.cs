@@ -18,12 +18,13 @@ namespace OnlineShopDAW.Controllers
             if (id == null) {
                 products = from prod
                            in db.Products.Include("Category").Include("Reviews")
+                           where prod.Status == ProductStatus.accepted
                            select prod;
             }
             else {
               products = from prod
                          in db.Products.Include("Category").Include("Reviews")
-                         where prod.Category.CategoryId == id
+                         where prod.Category.CategoryId == id && prod.Status == ProductStatus.accepted
                          select prod;
             }
 
@@ -41,10 +42,21 @@ namespace OnlineShopDAW.Controllers
 
         public ActionResult Show(int id)
         {
-            var product = db.Products
-                .Include("Category")
-                .Include("Reviews")
-                .FirstOrDefault(p => p.ProductId == id);
+            Product product;
+            if (User.IsInRole("administrator"))
+            {
+                product = db.Products
+                    .Include("Category")
+                    .Include("Reviews")
+                    .FirstOrDefault(p => p.ProductId == id);
+            }
+            else
+            {
+                product = db.Products
+                    .Include("Category")
+                    .Include("Reviews")
+                    .FirstOrDefault(p => p.ProductId == id && p.Status == ProductStatus.accepted);
+            }
 
             SetButtonVisibility(product);
             ViewBag.Product = product;
@@ -121,21 +133,19 @@ namespace OnlineShopDAW.Controllers
 
                 if (product.ApplicationUser.Id == User.Identity.GetUserId() || User.IsInRole("administrator"))
                 {
-                    if (TryUpdateModel(product))
-                    {
-                        product.Name = requestProduct.Name;
-                        product.Description = requestProduct.Description;
-                        product.Price = requestProduct.Price;
-                        product.DiscountedPrice = requestProduct.DiscountedPrice;
-                        product.Image = requestProduct.Image;
-                        product.Stock = requestProduct.Stock;
-                        product.Status = requestProduct.Status;
-                        product.Category = db.Categories
-                            .First(c => c.CategoryId == requestProduct.Category.CategoryId);
-                        product.Status = requestProduct.Status;
-                        db.SaveChanges();
-                        TempData["message"] = "Produsul a fost modificat!";
-                    }
+                    product.Name = requestProduct.Name;
+                    product.Description = requestProduct.Description;
+                    product.Price = requestProduct.Price;
+                    product.DiscountedPrice = requestProduct.DiscountedPrice;
+                    product.Image = requestProduct.Image;
+                    product.Stock = requestProduct.Stock;
+                    product.Status = requestProduct.Status;
+                    product.Category = db.Categories
+                        .First(c => c.CategoryId == requestProduct.Category.CategoryId);
+                    product.Status = requestProduct.Status;
+                    db.SaveChanges();
+                    TempData["message"] = "Produsul a fost modificat!";
+
                     foreach (var modelState in ModelState.Values)
                     {
                         foreach (var error in modelState.Errors)

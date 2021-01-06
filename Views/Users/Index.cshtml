@@ -3,35 +3,36 @@
     ViewBag.Title = "Afisare utilizatori";
 }
 
-<ol class="breadcrumb">
-    <li><h3>@ViewBag.Title</h3></li>
-</ol>
+<div class="container">
+    <ol class="breadcrumb" style="display:flex; justify-content:center">
+        <li><h3>@ViewBag.Title</h3></li>
+    </ol>
 
-@foreach (var user in ViewBag.UsersList)
-{
-    <div class="panel-heading">Nume utilizator: @user.UserName</div>
+    @foreach (var user in ViewBag.UsersList)
+    {
+        <div class="container" style="display:flex; justify-content:center">
+            <div class="row">
+                <div>
+                    <div class="panel-heading">
+                        <i class="fa fa-user-circle"></i>  Nume utilizator: @user.FirstName @user.LastName
+                    </div>
+                    <div class="panel-body">
+                        <i class="fa fa-envelope"></i>  Email utilizator: <span class="label label-default">@user.Email</span>
+                        <br /><br />
 
-    <div class="panel-body">
-
-        <i class="glyphicon glyphicon-envelope"></i> Email utilizator: <span class="label label-default">@user.Email</span>
-
-        <br /><br />
-
-        @if (@user.PhoneNumber != null)
-        {
-            <i class="glyphicon glyphicon-phone"></i>@:Telefon utilizator:<span class="label label-default">@user.PhoneNumber</span>
-
-
-        }
-
-    </div>
-
-    <div class="panel-footer">
-
-        <a class="btn btn-sm btn-success" href="/Users/Edit/@user.Id"> Editare utilizator</a>
-        <a class="btn btn-sm btn-success" href="/Users/Show/@user.Id"> Vizualizare utilizator</a>
-
-    </div>
-
-    <br /><br />
-}
+                        @if (@user.PhoneNumber != null)
+                        {
+                            <i class="fa fa-phone"></i>@:Telefon utilizator:<span class="label label-default">@user.PhoneNumber</span>
+                        }
+                    </div>
+                    <div class="panel-footer">
+                        <a class="btn btn-sm btn-success" href="/Users/Edit/@user.Id"> Editare utilizator</a>
+                        <a class="btn btn-sm btn-info" href="/Users/Show/@user.Id"> Vizualizare utilizator</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+    }
+</div>

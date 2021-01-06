@@ -57,20 +57,18 @@ namespace OnlineShopDAW.Controllers
         [HttpPut]
         public ActionResult Edit(string id, ApplicationUser newData)
         {
-            ApplicationUser user = db.Users.Find(id);
-            user.AllRoles = GetAllRoles();
-            var userRole = user.Roles.FirstOrDefault();
-            ViewBag.userRole = userRole.RoleId;
-
             try
             {
                 ApplicationDbContext context = new ApplicationDbContext();
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
                 var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
+                ApplicationUser user = UserManager.FindById(id);
+                user.AllRoles = GetAllRoles();
+                var userRole = user.Roles.FirstOrDefault();
+                ViewBag.userRole = userRole.RoleId;
 
-                if (TryUpdateModel(user))
-                {
+                
                     user.UserName = newData.UserName;
                     user.Email = newData.Email;
 
@@ -84,6 +82,13 @@ namespace OnlineShopDAW.Controllers
                     UserManager.AddToRole(id, selectedRole.Name);
 
                     db.SaveChanges();
+                
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        System.Diagnostics.Debug.WriteLine(error.ErrorMessage);
+                    }
                 }
                 return RedirectToAction("Index");
             }

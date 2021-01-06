@@ -6,42 +6,46 @@
     ViewBag.Title = "Editare rol utilizator";
 }
 
-<ol class="breadcrumb">
-    <li><h3>@ViewBag.Title</h3></li>
-</ol>
 
-@using (Html.BeginForm(actionName: "Edit", controllerName: "Users", routeValues: new { id = @Model.Id }))
-{
-    @Html.HttpMethodOverride(HttpVerbs.Put)
+<div class="container">
+    <ol class="breadcrumb" style="display:flex; justify-content:center">
+        <li><h3>@ViewBag.Title</h3></li>
+    </ol>
 
-    <br />
+    <div class="container" style="display:flex; justify-content:center">
+        @using (Html.BeginForm(actionName: "Edit", controllerName: "Users", routeValues: new { id = @Model.Id }))
+        {
+            @Html.HttpMethodOverride(HttpVerbs.Put)
 
-    <i class="glyphicon glyphicon-user"></i>
-    @Html.Label("UserName", "Nume utilizator", new { @class = "" })
+            <br />
 
-    <br />
+            <i class="fa fa-user"></i>
+            @Html.Label("UserName", "Nume utilizator", new { @class = "" })
 
-    @Html.EditorFor(m => m.UserName)
+            <br />
 
-    <br /><br />
+            @Html.EditorFor(m => m.UserName)
 
-    <i class="glyphicon glyphicon-envelope"></i>
-    @Html.Label("Email", "Email utilizator", new { @class = "" })
+            <br /><br />
 
-    <br />
+            <i class="fa fa-envelope"></i>
+            @Html.Label("Email", "Email utilizator", new { @class = "" })
 
-    @Html.EditorFor(m => m.Email)
+            <br />
 
-    <br /><br />
+            @Html.EditorFor(m => m.Email)
 
-    <i class="glyphicon glyphicon-th-list"></i>
-    <label>Selectati rolul</label>
-    @Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text", ViewBag.userRole), null, new { @class = "form-control" })
+            <br /><br />
 
-    <br />
+            <i class="fa fa-th-list"></i>
+            <label>Selectati rolul</label>
+            @Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text", ViewBag.userRole), null, new { @class = "form-control" })
 
-    <button class="btn btn-sm btn-success" type="submit">Modifica datele utilizatorului</button>
+            <br />
+
+            <button class="btn btn-sm btn-success" type="submit">Modifica datele utilizatorului</button>
 
 
-}
-
+        }
+    </div>
+</div>

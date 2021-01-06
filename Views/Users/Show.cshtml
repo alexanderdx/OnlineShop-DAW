@@ -1,41 +1,41 @@
-@model OnlineShopDAW.Models.ApplicationUser 
+@model OnlineShopDAW.Models.ApplicationUser
 
 @{
     ViewBag.Title = "Detalii utilizator";
 }
 
-<ol class="breadcrumb">
-    <li><h3>@ViewBag.Title</h3></li>
-</ol>
+<div class="container">
+    <ol class="breadcrumb" style="display:flex; justify-content:center">
+        <li><h3>@ViewBag.Title</h3></li>
+    </ol>
 
-<div class="panel-heading">Nume utilizator: @Model.UserName</div>
+    <div class="container" style="display:flex; justify-content:center">
+        <div>
+            <i class="fa fa-user-circle"></i>  Nume utilizator: @Model.FirstName @Model.LastName
+            <div class="panel-body">
+                <i class="fa fa-envelope"></i>  Email utilizator: <span class="label label-default">@Model.Email</span>
+                <br />
+                <i class="fa fa-th-list"></i>  Rol utilizator: @ViewBag.roleName
+                <br /><br />
 
-<div class="panel-body">
+                @if (@Model.PhoneNumber != null)
+                {
+                    <i class="fa fa-phone"></i>@:Telefon utilizator:<span class="label label-default">@Model.PhoneNumber</span>
+                }
+            </div>
 
-    <i class="glyphicon glyphicon-envelope"></i> Email utilizator: <span class="label label-default">@Model.Email</span>
-    <br/>
-    <i class="glyphicon glyphicon-th-list"></i> Rol utilizator: @ViewBag.roleName
-    
-    <br /><br />
+            @if ((string)Model.Id != ViewBag.utilizatorCurent)
+            {
+                <div class="panel-footer">
+                    @using (Html.BeginForm(actionName: "Delete", controllerName: "Users", routeValues: new { id = @Model.Id }))
+                    {
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <br />
+                        <button class="btn btn-danger" type="submit">Sterge utilizator</button>
 
-    @if (@Model.PhoneNumber != null)
-    {
-        <i class="glyphicon glyphicon-phone"></i>@:Telefon utilizator:<span class="label label-default">@Model.PhoneNumber</span>
-
-
-    }
-
-</div>
-
-@if ((string)Model.Id != ViewBag.utilizatorCurent)
-{
-    <div class="panel-footer">
-        @using (Html.BeginForm(actionName: "Delete", controllerName: "Users", routeValues: new { id = @Model.Id }))
-        {
-            @Html.HttpMethodOverride(HttpVerbs.Delete)
-            <br />
-            <button class="btn btn-success" type="submit">Sterge utilizator</button>
-
-        }
+                    }
+                </div>
+            }
+        </div>
     </div>
-}
+</div>
