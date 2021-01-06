@@ -22,7 +22,5 @@
                         : scrollTop - INITIAL_LIST_HEIGHT + MARGIN_TO_TOP
             }, 250);
         });
-    } else {
-        $('#collapse-1').collapse('hide')
     }
 })(jQuery);

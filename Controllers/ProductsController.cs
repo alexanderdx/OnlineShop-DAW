@@ -208,6 +208,7 @@ namespace OnlineShopDAW.Controllers
             return selectList;
         }
 
+        [NonAction]
         private void SetButtonVisibility(Product product)
         {
             ViewBag.afisareButoane = false;

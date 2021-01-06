@@ -4,7 +4,7 @@
         <a class="btn btn-primary" data-toggle="collapse"
            aria-expanded="true" aria-controls="collapse-1" href="#collapse-1" role="button"
            style="width: 100%;">Show Categories</a>
-        <div class="collapse show" id="collapse-1">
+        <div class="collapse" id="collapse-1">
             <ul class="list-group" style="margin-top: 1rem;">
                 @foreach (Category cat in ViewBag.Categories)
                 {
@@ -20,10 +20,11 @@
         @foreach (Category cat in ViewBag.Categories)
         {
             <div class="btn-group dropright">
-                @Html.ActionLink(cat.Name, "index", "products", new { id = cat.CategoryId },
-                       new { @class = "btn btn-secondary", role = "button" })
-                <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
-                        data-toggle="dropdown" aria-expanded="false" type="button"></button>
+                @Html.ActionLink(cat.Name, "Index", "Products", new { id = cat.CategoryId },
+                       new { @class = "btn btn-secondary", role = "button", style = "flex:60%" })
+                <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button"
+                        data-toggle="dropdown" aria-expanded="false"
+                        style=""></button>
                 <div class="dropdown-menu">
                     @foreach (Product p in cat.Products)
                     {

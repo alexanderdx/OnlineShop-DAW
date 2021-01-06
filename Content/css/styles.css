@@ -13,10 +13,10 @@ body {
     margin-bottom: 8px;
 }
 
-    #search-field:focus, #search-field:active {
-        border: 2px solid var(--white);
-        width: 90%;
-    }
+#search-field:focus, #search-field:active {
+    border: 2px solid var(--white);
+    width: 85%;
+}
 
 @media (min-width: 992px) {
     #search-field {
@@ -36,9 +36,9 @@ body {
     transition: filter .2s ease-in-out;
 }
 
-    .card a img:hover {
-        filter: brightness(.75);
-    }
+.card a img:hover {
+    filter: brightness(.75);
+}
 
 .card-columns {
     column-count: 1;
@@ -66,13 +66,13 @@ body {
     display: none
 }
 
-    .rating > label {
-        position: relative;
-        width: 1em;
-        font-size: 40px;
-        color: #00bc8c;
-        cursor: pointer
-    }
+.rating > label {
+    position: relative;
+    width: 1em;
+    font-size: 40px;
+    color: #00bc8c;
+    cursor: pointer
+}
 
 .rating > label::before {
     content: "\2605";
