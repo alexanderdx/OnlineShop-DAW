@@ -1,0 +1,42 @@
+﻿<div class="row row-cols-1 align-items-center my-3">
+    <div class="col">
+        <span class="h3 font-weight-bold">
+            @{ 
+                switch (ViewBag.EntityType)
+                {
+                    case "product":
+                        @: Search for "@ViewBag.Query" in Products
+                        break;
+                    case "category":
+                        @: Search for "@ViewBag.Query" in Categories
+                        break;
+                    case "review":
+                        @: Search for "@ViewBag.Query" in Reviews
+                        break;
+                    default:
+                        break;
+                }
+            }
+        </span>
+    </div>
+    <div class="col">
+        <span class="text-muted">
+            @{ 
+                switch (ViewBag.EntityType)
+                {
+                    case "product":
+                        @: Search for&nbsp;<a href="/Search?query=@ViewBag.Query&entity_type=review">Reviews</a>&nbsp;or&nbsp;<a href="/Search?query=@ViewBag.Query&entity_type=category">Categories</a>
+                        break;
+                    case "category":
+                        @: Search for&nbsp;<a href="/Search?query=@ViewBag.Query&entity_type=product">Products</a>&nbsp;or&nbsp;<a href="/Search?query=@ViewBag.Query&entity_type=review">Reviews</a>
+                        break;
+                    case "review":
+                        @: Search for&nbsp;<a href="/Search?query=@ViewBag.Query&entity_type=product">Products</a>&nbsp;or&nbsp;<a href="/Search?query=@ViewBag.Query&entity_type=category">Categories</a>
+                        break;
+                    default:
+                        break;
+                }
+            }
+        </span>
+    </div>
+</div>

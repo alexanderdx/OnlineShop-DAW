@@ -1,0 +1,104 @@
+﻿<div class="row justify-content-around mt-4">
+    <div class="col-auto text-center align-self-center">
+        <div>
+            <span>Order by</span>
+        </div>
+        <select class="custom-select custom-select-sm" id="order-by-select">
+            @{
+                if (ViewBag.OrderBy == "name_asc")
+                {
+                    <option value="name_asc" selected="">
+                        Name Ascending
+                    </option>
+                }
+                else
+                {
+                    <option value="name_asc">
+                        Name Ascending
+                    </option>
+                }
+            }
+            @{
+                if (ViewBag.OrderBy == "name_desc")
+                {
+                    <option value="name_desc" selected="">
+                        Name Descending
+                    </option>
+                }
+                else
+                {
+                    <option value="name_desc">
+                        Name Descending
+                    </option>
+                }
+            }
+            @{
+                if (ViewBag.OrderBy == "price_asc")
+                {
+                    <option value="price_asc" selected="">
+                        Price Ascending
+                    </option>
+                }
+                else
+                {
+                    <option value="price_asc">
+                        Price Ascending
+                    </option>
+                }
+            }
+            @{
+                if (ViewBag.OrderBy == "price_desc")
+                {
+                    <option value="price_desc" selected="">
+                        Price Descending
+                    </option>
+                }
+                else
+                {
+                    <option value="price_desc">
+                        Price Descending
+                    </option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-auto text-center align-self-center">
+        <div>
+            <span>Items per page</span>
+        </div>
+        <select class="custom-select custom-select-sm" id="take-select">
+            @{
+                if (ViewBag.Take == 3)
+                {
+                    <option value="3" selected="">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                }
+                else if (ViewBag.Take == 5)
+                {
+                    <option value="3">3</option>
+                    <option value="5" selected="">5</option>
+                    <option value="10">10</option>
+                }
+                else
+                {
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10" selected="">10</option>
+                }
+            }
+        </select>
+    </div>
+</div>
+<script>
+    document.getElementById("order-by-select").addEventListener("change", ev => {
+        const params = (new URL(document.location)).searchParams;
+        params.set("order_by", ev.currentTarget.value)
+        window.location.search = params.toString()
+    })
+    document.getElementById("take-select").addEventListener("change", ev => {
+        const params = (new URL(document.location)).searchParams;
+        params.set("take", ev.currentTarget.value)
+        window.location.search = params.toString()
+    })
+</script>
