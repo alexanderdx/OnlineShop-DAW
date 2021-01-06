@@ -107,11 +107,12 @@ namespace OnlineShopDAW.Controllers
         public ActionResult Delete(int id)
         {
             Review review = db.Reviews.Find(id);
+            var productId = review.Product.ProductId;
             if (review.ApplicationUser.Id == User.Identity.GetUserId() || User.IsInRole("administrator"))
             {
                 db.Reviews.Remove(review);
                 db.SaveChanges();
-                return RedirectToAction("Show", "Products", new { id = review.Product.ProductId });
+                return RedirectToAction("Show", "Products", new { id = productId });
             }
             else
             {

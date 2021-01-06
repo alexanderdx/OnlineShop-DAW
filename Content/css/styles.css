@@ -1,58 +1,95 @@
 body {
-  font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 #search-field {
-  background: var(--secondary);
-  color: var(--white);
-  transition: border .25s ease-in-out, width .25s ease-in-out .2s;
-  box-shadow: none;
-  border: 2px solid transparent;
-  width: 40%;
-  box-sizing: border-box;
-  margin-bottom: 8px;
+    background: var(--secondary);
+    color: var(--white);
+    transition: border .25s ease-in-out, width .25s ease-in-out .2s;
+    box-shadow: none;
+    border: 2px solid transparent;
+    width: 40%;
+    box-sizing: border-box;
+    margin-bottom: 8px;
 }
 
-#search-field:focus, #search-field:active {
-  border: 2px solid var(--white);
-  width: 90%;
-}
+    #search-field:focus, #search-field:active {
+        border: 2px solid var(--white);
+        width: 90%;
+    }
 
 @media (min-width: 992px) {
-  #search-field {
-    margin-bottom: unset;
-  }
+    #search-field {
+        margin-bottom: unset;
+    }
 }
 
 .nav-item {
-  margin-right: 8px;
+    margin-right: 8px;
 }
 
 .navbar-dark .navbar-toggler-icon {
-  background-image: none;
+    background-image: none;
 }
 
 .card a img {
-  transition: filter .2s ease-in-out;
+    transition: filter .2s ease-in-out;
 }
 
-.card a img:hover {
-  filter: brightness(.75);
-}
+    .card a img:hover {
+        filter: brightness(.75);
+    }
 
 .card-columns {
-  column-count: 1;
+    column-count: 1;
 }
 
 @media (min-width: 576px) {
-  .card-columns {
-    column-count: 2;
-  }
+    .card-columns {
+        column-count: 2;
+    }
 }
 
 @media (min-width: 1200px) {
-  .card-columns {
-    column-count: 3;
-  }
+    .card-columns {
+        column-count: 3;
+    }
 }
 
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end
+}
+
+.rating > input {
+    display: none
+}
+
+    .rating > label {
+        position: relative;
+        width: 1em;
+        font-size: 40px;
+        color: #00bc8c;
+        cursor: pointer
+    }
+
+.rating > label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating > label:hover:before,
+.rating > label:hover ~ label:before {
+    opacity: 1 !important
+}
+
+.rating > input:checked ~ label:before {
+    opacity: 1
+}
+
+hr.reviewSeparator {
+    border-bottom: 1px solid #00bc8c;
+    opacity: 0.7;
+}

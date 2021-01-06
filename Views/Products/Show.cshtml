@@ -37,7 +37,8 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <div>
-                    <p>@review.Content</p>
+                    <p style="font-weight: bold">@review.ApplicationUser.FirstName says:</p>
+                    <p style="font-size: 24px">@review.Content</p>
                     <small class="pull-right">@review.CreatedAt</small>
                 </div>
                 @if (review.ApplicationUser.Id == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
@@ -52,11 +53,20 @@
                         </form>
                     </div>
                 }
+            <div class="container" style="text-align:center; color:#00bc8c">
+                @for (int i = 1; i <= review.Rating; ++i)
+                {
+                    <span class="fa fa-star"></span>
+                }
+                @for (int i = review.Rating; i < 5; ++i)
+                {
+                    <span class="fa fa-star-o"></span>                    
+                }
+            </div>
+            <hr class="reviewSeparator"/>
             </div>
         </div>
-        <div class="col-md-2"></div>
     </div>
-    <hr />
 }
 
 
@@ -74,7 +84,20 @@
                             <label>Continut review</label>
                             <br />
                             <textarea class="form-control" name="Content"></textarea>
-                            <br />
+                            
+                            <div class="rating">
+                                <input type="radio" name="Rating" value="5" id="5">
+                                <label for="5">☆</label> 
+                                <input type="radio" name="Rating" value="4" id="4">
+                                <label for="4">☆</label> 
+                                <input type="radio" name="Rating" value="3" id="3">
+                                <label for="3">☆</label>
+                                <input type="radio" name="Rating" value="2" id="2">
+                                <label for="2">☆</label> 
+                                <input type="radio" name="Rating" value="1" id="1">
+                                <label for="1">☆</label>
+                            </div>
+                            
                             <button class="btn btn-success " type="submit">Adauga review</button>
                         </div>
                     </form>
