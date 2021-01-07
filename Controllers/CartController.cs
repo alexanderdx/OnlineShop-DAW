@@ -28,10 +28,19 @@ namespace OnlineShopDAW.Controllers
             return View();
         }
 
-        public ActionResult AddToCart(int id)
+        public ActionResult AddToCart(int id, string quantity)
         {
             Product product = db.Products.Find(id);
             var cart = new List<Tuple<Product, int>>();
+            int parsedQuantity;
+            try
+            {
+                parsedQuantity = Int32.Parse(quantity);
+            }
+            catch
+            {
+                parsedQuantity = 1;
+            }
 
             if (Session["cart"] == null)
             {
@@ -43,8 +52,7 @@ namespace OnlineShopDAW.Controllers
                 int index = itemAlreadyInCart(id);
                 if (index != -1)
                 {
-                    int quantity = cart[index].Item2;
-                    cart[index] = new Tuple<Product, int>(product, quantity + 1);
+                    cart[index] = new Tuple<Product, int>(product, parsedQuantity);
                 }
                 else
                 {
