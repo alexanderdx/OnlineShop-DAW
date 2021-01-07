@@ -31,7 +31,6 @@ namespace OnlineShopDAW.Models
         public ProductStatus Status { get; set; }
         [Required]
         public DateTime CreatedAt { get; set; }
-        [Required]
         public virtual Category Category { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
 

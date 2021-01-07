@@ -1,0 +1,50 @@
+﻿@{ ViewBag.Title = "Search"; }
+@using OnlineShopDAW.Models
+
+<div class="container">
+    <div class="row">
+        @Html.Partial("CategoryList")
+        <div class="col">
+            @Html.Partial("Search/SearchHeader")
+            @{ 
+                if (ViewBag.EntitiesFound.Count == 0)
+                {
+                    <h4 class="text-center">No results.</h4>
+                }
+                else
+                {
+                    <ul class="list-group">
+                        @{ 
+                            if (ViewBag.EntityType == "category")
+                            {
+                                foreach (Category c in ViewBag.EntitiesFound)
+                                {
+                                    @Html.Partial("Search/CategorySearchItem", c)
+                                }
+                            }
+                            else if (ViewBag.EntityType == "review")
+                            {
+                                foreach (Review r in ViewBag.EntitiesFound)
+                                {
+                                    @Html.Partial("Search/ReviewSearchItem", r)
+                                }
+                            }
+                            else
+                            {
+                                foreach (Product p in ViewBag.EntitiesFound)
+                                {
+                                    @Html.Partial("Search/ProductSearchItem", p)
+                                }
+                            }
+                        }
+                    </ul>
+                    if (ViewBag.EntityType != "category")
+                    {
+                        @Html.Partial("Search/SearchOptions")
+                    }
+                    @Html.Partial("Search/SearchPagination")
+                }
+            }
+        </div>
+    </div>
+</div>
