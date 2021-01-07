@@ -1,0 +1,37 @@
+﻿@model Tuple<OnlineShopDAW.Models.Product, int>
+<li class="list-group-item">
+    <div class="row">
+        <div class="col-auto text-center align-self-center my-1 d-none d-xl-block">
+            <a href="/Products/Show/@Model.Item1.ProductId">
+                <img class="img-fluid rounded" src="@Model.Item1.Image" style="max-height: 120px;">
+            </a>
+        </div>
+        <div class="col d-flex flex-column justify-content-between my-1">
+            <a href="/Products/Show/@Model.Item1.ProductId">
+                <h4 class="font-weight-bold">@Model.Item1.Name</h4>
+            </a>
+            <div class="row">
+                <div class="col-auto align-self-center">
+                    <span class="text-right text-danger font-weight-bold">
+                        @Model.Item1.Price RON
+                    </span>
+                </div>
+                <div class="col-auto align-self-center">
+                    <label class="text-muted mr-1 mb-0" for="quantity-input-2">
+                        Qty
+                    </label>
+                    <input type="number" id="quantity-input-2" class="rounded" name="quantity" value="@Model.Item2.ToString()" min="1"
+                                                                                           max="999" step="1" style="width: 50px;">
+                </div>
+                <div class="col text-right align-self-center">
+                    <button class="btn btn-danger btn-sm ml-2" type="button">
+                        <span class="d-none d-lg-inline" style="margin-right: 8px;">
+                            Remove from Cart
+                        </span>
+                        <i class="fa fa-cart-arrow-down"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
