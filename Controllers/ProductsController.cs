@@ -157,7 +157,6 @@ namespace OnlineShopDAW.Controllers
                     product.Description = requestProduct.Description;
                     product.Price = requestProduct.Price;
                     product.DiscountedPrice = requestProduct.DiscountedPrice;
-                    product.Image = requestProduct.Image;
                     product.Stock = requestProduct.Stock;
                     product.Status = requestProduct.Status;
                     product.Category = db.Categories
