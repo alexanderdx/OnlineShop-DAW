@@ -21,7 +21,10 @@ namespace OnlineShopDAW.Controllers
                            in db.Products
                            select prod;
 
-            ViewBag.Products = products;
+            ViewBag.Products = products
+                .OrderByDescending(x => x.CreatedAt)
+                .ToList();
+
             return View();
         }
 
