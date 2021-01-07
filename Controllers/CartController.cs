@@ -33,6 +33,7 @@ namespace OnlineShopDAW.Controllers
             Product product = db.Products.Find(id);
             var cart = new List<Tuple<Product, int>>();
             int parsedQuantity;
+            bool wasNull = false;
             try
             {
                 parsedQuantity = Int32.Parse(quantity);
@@ -40,6 +41,7 @@ namespace OnlineShopDAW.Controllers
             catch
             {
                 parsedQuantity = 1;
+                wasNull = true;
             }
 
             if (Session["cart"] == null)
@@ -52,11 +54,14 @@ namespace OnlineShopDAW.Controllers
                 int index = itemAlreadyInCart(id);
                 if (index != -1)
                 {
-                    cart[index] = new Tuple<Product, int>(product, parsedQuantity);
+                    if (wasNull) // daca requestul nu a specificat o cantitate noua, atunci incrementam cantitatea actuala
+                        cart[index] = new Tuple<Product, int>(product, cart[index].Item2 + 1);
+                    else // altfel alocam cantitatea specificata
+                        cart[index] = new Tuple<Product, int>(product, parsedQuantity);
                 }
                 else
                 {
-                    cart.Add(new Tuple<Product, int>(product, 1));
+                    cart.Add(new Tuple<Product, int>(product, parsedQuantity));
                 }
             }
             

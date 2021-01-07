@@ -38,10 +38,10 @@
                 <div style="margin-bottom: 0.5rem;">
                     <label class="text-muted" for="quantity-input" style="margin-right: .5rem;margin-bottom: 0;">Quantity: @Model.Stock</label>
                 </div>
-                <button class="btn btn-primary" type="button">
+                <a class="btn btn-primary" type="button" href="/cart/addtocart/@Model.ProductId">
                     <span style="margin-right: 8px;">Add to Cart</span>
                     <i class="fa fa-cart-plus"></i>
-                </button>
+                </a>
                 <button class="btn btn-outline-danger" data-toggle="tooltip" data-bs-tooltip="" type="button" title="Add to Favourites" style="margin-left: 0.5rem;"><i class="fa fa-heart"></i></button>
             </div>
         </div>
