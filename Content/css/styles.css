@@ -32,11 +32,11 @@ body {
     background-image: none;
 }
 
-.card a img {
+.card a img, .list-group a img {
     transition: filter .2s ease-in-out;
 }
 
-.card a img:hover {
+.card a img:hover, .list-group a img:hover {
     filter: brightness(.75);
 }
 
