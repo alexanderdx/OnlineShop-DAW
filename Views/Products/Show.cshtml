@@ -12,7 +12,7 @@
         <a href="/products/index">Inapoi la produse</a>
         <br />
         @Html.Partial("ProductInfo", Model)
-        @if (ViewBag.afisareButoane == true && ViewBag.esteAdmin)
+        @if (ViewBag.afisareButoane == true)
         {
             <div class="panel-footer">
                 <a class="btn btn-success pull-left" href="/products/edit/@Model.ProductId">Modifica produs</a>
