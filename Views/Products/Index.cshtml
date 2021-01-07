@@ -1,7 +1,7 @@
 ﻿@{ ViewBag.Title = "Products"; }
 
 <div class="container">
-    <h1>@TempData["message"]</h1>
+    <h3 class="text-center">@TempData["message"]</h3>
 
     @if (ViewBag.esteAdmin || ViewBag.esteColaborator)
     {
@@ -12,7 +12,7 @@
 
     @if (ViewBag.Category != null)
     {
-        <ol class="breadcrumb" style="/*background-color: transparent;*//*padding: 0;*/">
+        <ol class="breadcrumb">
             <li class="breadcrumb-item">@Html.ActionLink("Home", "Index", "Home")</li>
             <li class="breadcrumb-item"><a href="/categories/show/@ViewBag.Category.CategoryId">@ViewBag.Category.Name</a></li>
             <li class="breadcrumb-item active"><span>Products</span></li>

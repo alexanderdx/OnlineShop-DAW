@@ -1,7 +1,10 @@
 ﻿
-<div class="row" style="margin: 60px -15px;">
-    <div class="col-5"><a href="/products/show/@Model.ProductId">
-        <img class="img-fluid" src="@Model.Image" style="border-radius: 0.25rem;"></a></div>
+<div class="row bg-dark rounded p-4 mx-2 my-4">
+    <div class="col-5 text-center">
+        <a href="/products/show/@Model.ProductId">
+            <img class="img-fluid rounded image-hover-transition" src="@Model.Image" style="max-height: 16rem;">
+        </a>
+    </div>
     <div class="col d-flex flex-column justify-content-between">
         <div class="row">
             <div class="col">
