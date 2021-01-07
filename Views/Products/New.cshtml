@@ -1,8 +1,9 @@
 ﻿@model OnlineShopDAW.Models.Product
+@{ ViewBag.Title = "New Product"; }
 
 <h2>Adauga un produs nou</h2>
 
-@using (Html.BeginForm(actionName: "new", controllerName: "products"))
+@using (Html.BeginForm("New", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
@@ -17,6 +18,12 @@
     <br />
     @Html.TextAreaFor(p => p.Description, new { @class = "form-control" })
     @Html.ValidationMessageFor(p => p.Description, "Descrierea este obligatorie", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    @Html.LabelFor(p => p.Image, "Imagine")
+    <br />
+    <input type="file" accept="image/png, image/jpeg" name="product_image">
     <br />
     <br />
 

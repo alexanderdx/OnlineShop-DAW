@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -74,7 +75,7 @@ namespace OnlineShopDAW.Controllers
 
         [HttpPost]
         [Authorize(Roles = "administrator,collaborator")]
-        public ActionResult New(Product product)
+        public ActionResult New(Product product, HttpPostedFileBase product_image)
         {
             try
             {
@@ -83,6 +84,25 @@ namespace OnlineShopDAW.Controllers
                 product.Category = db.Categories.Find(product.Category.CategoryId);
                 product.Categ = GetAllCategories();
                 product.Status = ProductStatus.pending;
+
+                string mapPath = Server.MapPath("~/Content/img/");
+                string newGuid = Guid.NewGuid().ToString();
+                string extension;
+                switch (product_image.ContentType)
+                {
+                    case "image/png":
+                        extension = ".png";
+                        break;
+                    case "image/jpeg":
+                        extension = ".jpeg";
+                        break;
+                    default:
+                        throw new Exception("Invalid image file.");
+                }
+
+                product_image.SaveAs(mapPath + newGuid + extension);
+
+                product.Image = "/Content/img/" + newGuid + extension;
 
                 TempData["message"] = "Produsul a fost trimis catre evaluare! Va multumim!";
 
