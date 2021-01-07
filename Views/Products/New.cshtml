@@ -1,57 +1,58 @@
 ﻿@model OnlineShopDAW.Models.Product
 @{ ViewBag.Title = "New Product"; }
 
-<h2>Adauga un produs nou</h2>
+<div class="container">
+    <h2>Adauga un produs nou</h2>
 
-@using (Html.BeginForm("New", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @using (Html.BeginForm("New", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
-    @Html.LabelFor(p => p.Name, "Nume produs")
-    <br />
-    @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
-    @Html.ValidationMessageFor(p => p.Name, "Numele este obligatoriu", new { @class = "text-danger" })
-    <br />
-    <br />
+        @Html.LabelFor(p => p.Name, "Nume produs")
+        <br />
+        @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Name, "Numele este obligatoriu", new { @class = "text-danger" })
+        <br />
+        <br />
 
-    @Html.LabelFor(p => p.Description, "Descriere produs")
-    <br />
-    @Html.TextAreaFor(p => p.Description, new { @class = "form-control" })
-    @Html.ValidationMessageFor(p => p.Description, "Descrierea este obligatorie", new { @class = "text-danger" })
-    <br />
-    <br />
+        @Html.LabelFor(p => p.Description, "Descriere produs")
+        <br />
+        @Html.TextAreaFor(p => p.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Description, "Descrierea este obligatorie", new { @class = "text-danger" })
+        <br />
+        <br />
 
-    @Html.LabelFor(p => p.Image, "Imagine")
-    <br />
-    <input type="file" accept="image/png, image/jpeg" name="product_image">
-    <br />
-    <br />
+        @Html.LabelFor(p => p.Image, "Imagine")
+        <br />
+        <input type="file" accept="image/png, image/jpeg" name="product_image">
+        <br />
+        <br />
 
-    @Html.LabelFor(p => p.Price, "Pret")
-    <br />
-    @Html.TextBoxFor(p => p.Price, new { @class = "form-control" })
-    @Html.ValidationMessageFor(p => p.Price, "Pretul este obligatoriu", new { @class = "text-danger" })
-    <br />
-    <br />
+        @Html.LabelFor(p => p.Price, "Pret")
+        <br />
+        @Html.TextBoxFor(p => p.Price, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Price, "Pretul este obligatoriu", new { @class = "text-danger" })
+        <br />
+        <br />
 
-    @Html.LabelFor(p => p.Stock, "Buc. stoc")
-    <br />
-    @Html.TextBoxFor(p => p.Stock, new { @class = "form-control" })
-    @Html.ValidationMessageFor(p => p.Stock, "Stocul este obligatoriu", new { @class = "text-danger" })
-    <br />
-    <br />
+        @Html.LabelFor(p => p.Stock, "Buc. stoc")
+        <br />
+        @Html.TextBoxFor(p => p.Stock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Stock, "Stocul este obligatoriu", new { @class = "text-danger" })
+        <br />
+        <br />
 
-    <br />
-    <br />
+        <br />
+        <br />
 
-    @Html.LabelFor(p => p.Category.CategoryId, "Selectati categoria")
-    @Html.DropDownListFor(p => p.Category.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
-    "Selectati categoria", new { @class = "form-control" })
-    @Html.ValidationMessageFor(p => p.Category.CategoryId, "", new { @class = "text-danger" })
-    <br />
-    <br />
+        @Html.LabelFor(p => p.Category.CategoryId, "Selectati categoria")
+        @Html.DropDownListFor(p => p.Category.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
+        "Selectati categoria", new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Category.CategoryId, "", new { @class = "text-danger" })
+        <br />
+        <br />
 
-    <button class="btn btn-sm btn-success" type="submit">Adauga produs</button>
+        <button class="btn btn-sm btn-success" type="submit">Adauga produs</button>
 
-}
-
+    }
+</div>
