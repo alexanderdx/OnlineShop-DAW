@@ -20,6 +20,63 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
     <script src="~/Content/js/bs-init.js"></script>
-    <script src="~/Content/js/script.js"></script>
+    <script>
+        if (true)
+            (function ($) {
+                $('#carousel-1').carousel({ interval: 3000 })
+                const MD_BREAKPOINT_BOOTSTRAP = 768
+                if (window.innerWidth >= MD_BREAKPOINT_BOOTSTRAP) {
+                    const elem = $('#category-list')
+                    if (!elem) return
+
+                    const MARGIN_TO_TOP = window.innerWidth * 0.02
+                    const INITIAL_ELEM_HEIGHT = elem.offset().top
+
+                    elem.css('position', 'relative');
+
+                    $(window).on('scroll', ev => {
+                        if (window.innerWidth < MD_BREAKPOINT_BOOTSTRAP) {
+                            elem.css('position', '')
+                            return
+                        }
+                        const scrollTop = $(window).scrollTop();
+
+                        elem.stop(false, false).animate({
+                            top: scrollTop < INITIAL_ELEM_HEIGHT
+                                ? 0
+                                : scrollTop - INITIAL_ELEM_HEIGHT + MARGIN_TO_TOP
+                        }, 250);
+                    });
+                }
+            })(jQuery);
+    </script>
+    <script>
+        (function ($) {
+            const MD_BREAKPOINT_BOOTSTRAP = 768
+            if (window.innerWidth >= MD_BREAKPOINT_BOOTSTRAP) {
+                const elem = $('#cart-summary')
+                if (!elem) return
+
+                const MARGIN_TO_TOP = window.innerWidth * 0.02
+                const INITIAL_ELEM_HEIGHT = elem.offset().top
+
+                elem.css('position', 'relative');
+
+                $(window).on('scroll', ev => {
+                    if (window.innerWidth < MD_BREAKPOINT_BOOTSTRAP) {
+                        elem.css('position', '')
+                        return
+                    }
+                    const scrollTop = $(window).scrollTop();
+
+                    elem.stop(false, false).animate({
+                        top: scrollTop < INITIAL_ELEM_HEIGHT
+                            ? 0
+                            : scrollTop - INITIAL_ELEM_HEIGHT + MARGIN_TO_TOP
+                    }, 250);
+                });
+            }
+        })(jQuery);
+    </script>
 </body>
 </html>
