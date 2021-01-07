@@ -43,6 +43,9 @@
             }
             @{ if (User.Identity.IsAuthenticated)
                 {
+                    <a href="/Cart" class="btn btn-outline-primary text-white font-weight-bold action-button mr-2">
+                        <i class="fa fa-shopping-cart"></i>
+                    </a>
                     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                     {
                         @Html.AntiForgeryToken()
@@ -56,8 +59,8 @@
                 }
                 else
                 {
-                    @Html.ActionLink("Login", "Login", "Account", null, new Dictionary<string, object> { { "role", "button" }, { "class", "btn btn-outline-primary text-white font-weight-bold action-button mr-2" } })
-                    @Html.ActionLink("Register", "Register", "Account", null, new Dictionary<string, object> { { "role", "button" }, { "class", "btn btn-primary action-button font-weight-bold" } })
+                    @Html.ActionLink("Login", "Login", "Account", null, new { role = "button" , @class = "btn btn-outline-primary text-white font-weight-bold action-button mr-2" })
+                    @Html.ActionLink("Register", "Register", "Account", null, new { role = "button", @class = "btn btn-primary action-button font-weight-bold" })
                 }
              }
         </div>

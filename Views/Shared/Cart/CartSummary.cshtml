@@ -4,51 +4,69 @@
         <div class="card-body">
             <h3 class="text-center">Summary</h3>
             <hr>
-            <ul class="list-unstyled">
-                @{ 
-                    foreach (Tuple<Product, int> item in ViewBag.CartItems)
-                    {
-                        <li>
-                            <div class="d-flex flex-row justify-content-between align-items-center">
-                                <span>@item.Item2.ToString() x @item.Item1.Name</span>
-                                <span>@item.Item1.Price</span>
-                            </div>
-                        </li>
+            @{ 
+                if (ViewBag.CartItems != null)
+                {
+                    <ul class="list-unstyled">
+                    @{ 
+                        foreach (Tuple<Product, int> item in ViewBag.CartItems)
+                        {
+                            <li>
+                                <div class="d-flex flex-row justify-content-between align-items-center">
+                                    <span>@item.Item2.ToString() x @item.Item1.Name</span>
+                                    <span>@item.Item1.Price</span>
+                                </div>
+                            </li>
+                        }
                     }
-                }
-                @{ 
-                    var totalDiscount = ((List<Tuple<Product, int>>)ViewBag.CartItems)
-                                    .Sum(x => x.Item1.DiscountedPrice == null
-                                        ? 0
-                                        : x.Item1.Price - x.Item1.DiscountedPrice);
-                    if (totalDiscount > 0)
-                    {
-                        <li>
-                            <div class="text-danger d-flex flex-row justify-content-between align-items-center font-weight-bold">
-                                <span>Discounts</span>
-                                <span>- @totalDiscount RON</span>
-                            </div>
-                        </li>
+                    @{ 
+                        var totalDiscount = ((List<Tuple<Product, int>>)ViewBag.CartItems)
+                                        .Sum(x => x.Item1.DiscountedPrice == null
+                                            ? 0
+                                            : x.Item1.Price - x.Item1.DiscountedPrice);
+                        if (totalDiscount > 0)
+                        {
+                            <li>
+                                <div class="text-danger d-flex flex-row justify-content-between align-items-center font-weight-bold">
+                                    <span>Discounts</span>
+                                    <span>- @totalDiscount RON</span>
+                                </div>
+                            </li>
+                        }
                     }
+                    </ul>
+                    <hr>
+                    <div class="d-flex flex-row justify-content-between align-content-center font-weight-bold"
+                         style="font-size: x-large;">
+                        <span>Total</span>
+                        @{ 
+                            var totalToPay = ((List<Tuple<Product, int>>)ViewBag.CartItems)
+                                            .Sum(x => x.Item1.DiscountedPrice == null
+                                                ? x.Item1.Price * x.Item2
+                                                : x.Item1.DiscountedPrice * x.Item2);
+                        }
+                        <span>@totalToPay RON</span>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary font-weight-bold" type="button">
+                            Confirm Order
+                        </button>
+                    </div>
                 }
-            </ul>
-            <hr>
-            <div class="d-flex flex-row justify-content-between align-content-center font-weight-bold"
-                 style="font-size: x-large;">
-                <span>Total</span>
-                @{ 
-                    var totalToPay = ((List<Tuple<Product, int>>)ViewBag.CartItems)
-                                    .Sum(x => x.Item1.DiscountedPrice == null
-                                        ? x.Item1.Price * x.Item2
-                                        : x.Item1.DiscountedPrice * x.Item2);
+                else
+                {
+                    <div class="d-flex flex-row justify-content-between align-content-center font-weight-bold"
+                         style="font-size: x-large;">
+                        <span>Total</span>
+                        <span>0.00 RON</span>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary font-weight-bold disabled" type="button">
+                            Confirm Order
+                        </button>
+                    </div>
                 }
-                <span>@totalToPay RON</span>
-            </div>
-            <div class="text-center mt-4">
-                <button class="btn btn-primary font-weight-bold" type="button">
-                    Confirm Order
-                </button>
-            </div>
+            }
         </div>
     </div>
 </div>
