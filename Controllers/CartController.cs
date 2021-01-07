@@ -76,7 +76,14 @@ namespace OnlineShopDAW.Controllers
             var cart = (List<Tuple<Product, int>>)Session["cart"];
             int index = itemAlreadyInCart(id);
             cart.RemoveAt(index);
-            Session["cart"] = cart;
+            if (cart.Count == 0)
+            {
+                Session["cart"] = null;
+            }
+            else
+            {
+                Session["cart"] = cart;
+            }
             return RedirectToAction("Index");
         }
 
