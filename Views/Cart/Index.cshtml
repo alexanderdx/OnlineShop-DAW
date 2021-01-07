@@ -4,14 +4,15 @@
         <div class="col-lg-7 col-xl-8">
             <h2 class="text-center font-weight-bold">Shopping Cart</h2>
             <ul class="list-group my-4">
-                @{ 
+                @if (ViewBag.CartItems != null) { 
                     foreach (Tuple<Product, int> item in ViewBag.CartItems)
                     {
                         @Html.Partial("Cart/CartItem", item)
                     }
                 }
-            </ul>
         </div>
-        @Html.Partial("Cart/CartSummary")
+        @if (ViewBag.CartItems != null){
+            @Html.Partial("Cart/CartSummary")
+        }
     </div>
 </div>
