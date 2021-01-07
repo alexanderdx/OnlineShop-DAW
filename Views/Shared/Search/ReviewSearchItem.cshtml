@@ -13,9 +13,14 @@
             <p>@Model.Product.Description</p>
             <div class="d-flex flex-row align-items-center align-self-end">
                 <span class="text-right text-danger font-weight-bold">
-                    @{Model.Product.DiscountedPrice == null
-                            ? Model.Product.Price
-                            : Model.Product.DiscountedPrice}
+                    @if (Model.Product.DiscountedPrice == null)
+                    {
+                        @Model.Product.Price
+                    }
+                    else
+                    {
+                        @Model.Product.DiscountedPrice
+                    }
                 </span>
                 <button class="btn btn-primary btn-sm ml-2" type="button">
                     <span class="d-none d-lg-inline" style="margin-right: 8px;">
