@@ -22,11 +22,11 @@
                             @p.Description
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <button class="btn btn-primary btn-sm" type="button">
+                            <a class="btn btn-primary btn-sm" href="/Cart/AddToCart?id=@p.ProductId">
                                 <span class="d-none d-lg-inline"
                                       style="margin-right: 8px;">Add to Cart</span>
                                 <i class="fa fa-cart-plus"></i>
-                            </button>
+                            </a>
                             <span class="text-danger text-right font-weight-bold">
                                 @p.DiscountedPrice.ToString() RON
                             </span>
