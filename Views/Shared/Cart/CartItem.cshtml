@@ -10,28 +10,35 @@
             <a href="/Products/Show/@Model.Item1.ProductId">
                 <h4 class="font-weight-bold">@Model.Item1.Name</h4>
             </a>
-            <div class="row">
-                <div class="col-auto align-self-center">
-                    <span class="text-right text-danger font-weight-bold">
-                        @Model.Item1.Price RON
-                    </span>
-                </div>
-                <div class="col-auto align-self-center">
-                    <label class="text-muted mr-1 mb-0" for="quantity-input-2">
-                        Qty
-                    </label>
-                    <input type="number" id="quantity-input-2" class="rounded" name="quantity" value="@Model.Item2.ToString()" min="1"
-                                                                                           max="999" step="1" style="width: 50px;">
-                </div>
-                <div class="col text-right align-self-center">
-                    <button class="btn btn-danger btn-sm ml-2" type="button">
-                        <span class="d-none d-lg-inline" style="margin-right: 8px;">
-                            Remove from Cart
+            @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Get))
+            {
+                <div class="row">
+                    <div class="col-auto align-self-center">
+                        <span class="text-right text-danger font-weight-bold">
+                            @Model.Item1.Price RON
                         </span>
-                        <i class="fa fa-cart-arrow-down"></i>
-                    </button>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        <label class="text-muted mr-1 mb-0" for="quantity-input-2">
+                            Qty
+                        </label>
+                        <input type="hidden" value="@Model.Item1.ProductId" name="id">
+                        <input type="number" id="quantity-input-2" class="rounded" name="quantity" value="@Model.Item2.ToString()" min="1"
+                                max="999" step="1" style="width: 50px;">
+                    </div>
+                    <div class="col-auto align-self-center">
+                        <button class="btn btn-primary btn-sm" type="submit">Update Qty</button>
+                    </div>
+                    <div class="col text-right align-self-center">
+                        <a class="btn btn-danger btn-sm ml-2" href="/Cart/Remove?id=@Model.Item1.ProductId">
+                            <span class="d-none d-lg-inline" style="margin-right: 8px;">
+                                Remove
+                            </span>
+                            <i class="fa fa-cart-arrow-down"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </li>
