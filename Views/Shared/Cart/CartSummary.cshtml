@@ -23,7 +23,7 @@
                         var totalDiscount = ((List<Tuple<Product, int>>)ViewBag.CartItems)
                                         .Sum(x => x.Item1.DiscountedPrice == null
                                             ? 0
-                                            : x.Item1.Price - x.Item1.DiscountedPrice);
+                                            : x.Item2 * (x.Item1.Price - x.Item1.DiscountedPrice));
                         if (totalDiscount > 0)
                         {
                             <li>

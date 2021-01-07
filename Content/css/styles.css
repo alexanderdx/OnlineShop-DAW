@@ -15,7 +15,7 @@ body {
 
 #search-field:focus, #search-field:active {
     border: 2px solid var(--white);
-    width: 85%;
+    width: 80%;
 }
 
 @media (min-width: 992px) {
