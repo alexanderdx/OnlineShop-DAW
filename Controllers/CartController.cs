@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 
 namespace OnlineShopDAW.Controllers
 {
+    [Authorize(Roles ="administrator,collaborator,registered")]
     public class CartController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
